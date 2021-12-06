@@ -9,3 +9,11 @@ body {
   left: 0;
   top: 0;
 }
+#progressBar {
+  width: 500px;
+  height: 24px;
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  margin-left: -250px;
+}
