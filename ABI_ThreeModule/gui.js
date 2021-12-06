@@ -54,6 +54,18 @@ function buildGUI(gui, controlers, controler_flag) {
     const lightFolder = gui.addFolder("Light");
     lightFolder.add(controlers.pointLight, "visible").name("pointLight");
     lightFolder.add(controlers.ambientLight, "visible").name("ambientLight");
+    lightFolder.close();
+  }
+  {
+    // renderer
+    const renderFolder = gui.addFolder("Render");
+    renderFolder
+      .add(controlers.renderer, "physicallyCorrectLights")
+      .name("Physic light");
+    renderFolder
+      .add(controlers.renderer.shadowMap, "enabled")
+      .name("shadowMap");
+    renderFolder.close();
   }
 
   gui

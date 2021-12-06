@@ -1,16 +1,18 @@
-import * as THREE from "../three/build/three.module.js";
-
+// import * as THREE from "../three/build/three.module.js";
+// import Stats from "../three/examples/jsm/libs/stats.module.js";
 // import { OrbitControls } from "../three/examples/jsm/controls/OrbitControls.js";
 // import { GUI } from "../three/examples/jsm/libs/dat.gui.module.js";
-// import * as THREE from "https://threejs.org/build/three.module.js";
-import Stats from "../three/examples/jsm/libs/stats.module.js";
+
+import * as THREE from "https://threejs.org/build/three.module.js";
+import Stats from "https://threejs.org/examples/jsm/libs/stats.module.js";
+
 // import "https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.js";
 import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js";
 import { GUI } from "https://threejs.org/examples/jsm/libs/lil-gui.module.min.js";
 
 import { createCamera, createLight, loadImage } from "./basefn.js";
 import { buildGUI } from "./gui.js";
-import { loadObjFile, loadMTLFile } from "./loadModules.js";
+import { loadObjFile, loadMTLFile, loadGLTFFile } from "./loadModules.js";
 
 function initThreeD(canvas) {
   // Get scene
@@ -41,6 +43,7 @@ function initThreeD(canvas) {
     ambientLight,
     camera,
     scene,
+    renderer,
   };
   buildGUI(gui, controlers, controler_flag);
 
@@ -83,4 +86,4 @@ function initThreeD(canvas) {
   return { scene, camera };
 }
 
-export { initThreeD, loadImage, loadObjFile, loadMTLFile };
+export { initThreeD, loadImage, loadObjFile, loadMTLFile, loadGLTFFile };

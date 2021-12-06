@@ -18,7 +18,7 @@
   initThreeD():
   @Paras: a dom element
   Return: {Scene, Camera}
-  export:{initThreeD, loadImage, loadObjFile}
+  export:{initThreeD, loadObjFile, loadMTLFile, loadGLTFFile}
 
   basefn.js:
   createCamera():
@@ -56,7 +56,14 @@
   - camera: the camera object
   - progressBar: the loading bar dom
 
-  export { loadObjFile, loadMTLFile }
+  loadGLTFFile():
+  @Paras:
+
+  - url: .gltf/.glb file url
+  - scene: the basic scene object
+  - camera: the camera object
+  - progressBar: the loading bar dom
+    export { loadObjFile, loadMTLFile, loadGLTFFile }
 
 ## App folder
 
