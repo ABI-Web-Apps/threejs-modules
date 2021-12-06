@@ -9,7 +9,7 @@
 - This folder is js library
   It includes index.js, and below is the files structure image.
 
-![avatar](/public/images/2.jpg)
+![avatar](/public/images/2.png)
 
 - How to use:
   improt \* as Your_Variable_name from "../../ABI_ThreeModule/index.js"; (this relative path is used in examples, if you want to use you may change to your path)
@@ -41,13 +41,22 @@
 
   loadModules.js:
   getMaterial():
-  @Paras: obj, the Mesh object
+  @Paras: null
   Return: material
 
   loadObjFile():
-  @Paras: url(the .Obj file path/url), scene, camera
+  @Paras: url(the .Obj file path/url), scene, camera, material=null
 
-  export { loadObjFile }
+  loadMTLFile():
+  @Paras:
+
+  - url_mtl: .mtl file url
+  - url_obj: .obj file url
+  - scene: the basic scene object
+  - camera: the camera object
+  - progressBar: the loading bar dom
+
+  export { loadObjFile, loadMTLFile }
 
 ## App folder
 

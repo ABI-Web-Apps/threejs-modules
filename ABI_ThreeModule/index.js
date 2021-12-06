@@ -10,7 +10,7 @@ import { GUI } from "https://threejs.org/examples/jsm/libs/lil-gui.module.min.js
 
 import { createCamera, createLight, loadImage } from "./basefn.js";
 import { buildGUI } from "./gui.js";
-import { loadObjFile } from "./loadModules.js";
+import { loadObjFile, loadMTLFile } from "./loadModules.js";
 
 function initThreeD(canvas) {
   // Get scene
@@ -83,4 +83,4 @@ function initThreeD(canvas) {
   return { scene, camera };
 }
 
-export { initThreeD, loadImage, loadObjFile };
+export { initThreeD, loadImage, loadObjFile, loadMTLFile };
