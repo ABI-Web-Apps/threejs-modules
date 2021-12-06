@@ -1,14 +1,16 @@
-// import * as THREE from "../three/build/three.module.js";
+import * as THREE from "../three/build/three.module.js";
 
 // import { OrbitControls } from "../three/examples/jsm/controls/OrbitControls.js";
 // import { GUI } from "../three/examples/jsm/libs/dat.gui.module.js";
 // import * as THREE from "https://threejs.org/build/three.module.js";
-import "https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.js";
+import Stats from "../three/examples/jsm/libs/stats.module.js";
+// import "https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.js";
 import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js";
 import { GUI } from "https://threejs.org/examples/jsm/libs/lil-gui.module.min.js";
 
 import { createCamera, createLight, loadImage } from "./basefn.js";
 import { buildGUI } from "./gui.js";
+import { loadObjFile } from "./loadModules.js";
 
 function initThreeD(canvas) {
   // Get scene
@@ -35,6 +37,8 @@ function initThreeD(canvas) {
     cameraOpen: false,
   };
   const controlers = {
+    pointLight,
+    ambientLight,
     camera,
     scene,
   };
@@ -53,6 +57,9 @@ function initThreeD(canvas) {
     return needResize;
   }
 
+  const stats = Stats();
+  document.body.appendChild(stats.dom);
+
   function render() {
     if (resizeRenderTosiplaySize(renderer)) {
       const canvas = renderer.domElement;
@@ -63,6 +70,7 @@ function initThreeD(canvas) {
     renderer.render(scene, camera);
     // rotation
     requestAnimationFrame(render);
+    stats.update();
   }
 
   render();
@@ -72,7 +80,7 @@ function initThreeD(canvas) {
   controls.target.set(0, 0, 0);
   controls.update();
 
-  return { scene };
+  return { scene, camera };
 }
 
-export { initThreeD, loadImage };
+export { initThreeD, loadImage, loadObjFile };

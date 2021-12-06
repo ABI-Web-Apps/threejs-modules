@@ -49,6 +49,12 @@ function buildGUI(gui, controlers, controler_flag) {
       }
     }
   });
+  // light gui folder
+  {
+    const lightFolder = gui.addFolder("Light");
+    lightFolder.add(controlers.pointLight, "visible").name("pointLight");
+    lightFolder.add(controlers.ambientLight, "visible").name("ambientLight");
+  }
 
   gui
     .addColor(new ColorGUIHelper(controlers.scene, "background"), "value")
