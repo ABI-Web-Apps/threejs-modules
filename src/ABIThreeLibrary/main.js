@@ -1,18 +1,15 @@
-// import * as THREE from "../three/build/three.module.js";
-// import Stats from "../three/examples/jsm/libs/stats.module.js";
-// import { OrbitControls } from "../three/examples/jsm/controls/OrbitControls.js";
-// import { GUI } from "../three/examples/jsm/libs/dat.gui.module.js";
-
-import * as THREE from "https://threejs.org/build/three.module.js";
-import Stats from "https://threejs.org/examples/jsm/libs/stats.module.js";
-
-// import "https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.js";
-import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js";
-import { GUI } from "https://threejs.org/examples/jsm/libs/lil-gui.module.min.js";
-
-import { createCamera, createLight, loadImage } from "./basefn.js";
+import * as THREE from "three";
+import Stats from "three/examples/jsm/libs/stats.module.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { GUI } from "three/examples/jsm/libs/lil-gui.module.min.js";
+import { createCamera, createLight } from "./base.js";
 import { buildGUI } from "./gui.js";
-import { loadObjFile, loadMTLFile, loadGLTFFile } from "./loadModules.js";
+import {
+  loadImage,
+  loadObjFile,
+  loadMTLFile,
+  loadGLTFFile,
+} from "./loadModules";
 
 function initThreeD(canvas) {
   // Get scene
@@ -30,7 +27,7 @@ function initThreeD(canvas) {
   scene.background = new THREE.Color("black");
 
   // get camera
-  const aspect = window.innerWidth / window.innerHeight;
+  const aspect = canvas.clientWidth / canvas.clientHeight;
   let camera = createCamera(true, aspect);
   camera.lookAt(scene.position);
 
