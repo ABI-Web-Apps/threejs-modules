@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { VolumeLoader, stackHelperFactory } from "ami.js";
 
 function loadingBar(xhr, progressBar) {
   if (xhr.total !== 0) {
@@ -12,27 +11,6 @@ function loadingBar(xhr, progressBar) {
   } else {
     progressBar.style.display = "none";
   }
-}
-
-function loadImage(imageUrl, container, scene) {
-  //   console.log(AMI);
-  const loader = new VolumeLoader(container);
-  loader
-    .load(imageUrl)
-    .then((data) => {
-      const series = data[0].mergeSeries(data);
-      const stack = series[0].stack[0];
-      console.log("stack", stack);
-      loader.free();
-      //   const stackHelper = new AMI.stackHelperFactory(stack);
-      //   console.log()
-      const StackHelper = new stackHelperFactory(THREE);
-      //   console.log(StackHelper);
-      const stackHelper = new StackHelper();
-      console.log(stackHelper);
-      scene.add(stackHelper);
-    })
-    .catch((err) => console.error(err));
 }
 
 function getMaterial() {
@@ -93,4 +71,4 @@ function loadGLTFFile(url, scene, camera, progressBar) {
   );
 }
 
-export { loadImage, loadObjFile, loadMTLFile, loadGLTFFile };
+export { loadObjFile, loadMTLFile, loadGLTFFile };

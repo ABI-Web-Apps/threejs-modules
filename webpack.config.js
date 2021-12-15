@@ -8,19 +8,21 @@ const setMpa = () => {
   const entry = {}; //entry obj
   const htmlWebpackPlugins = []; //html-webpack-plugins store in here
   //get each single index file
-  const entryFiles = glob.sync(path.join(__dirname, "./src/*/index.js"));
+  const entryFiles = glob.sync(
+    path.join(__dirname, "./src/examples/*/index.js")
+  );
 
   Object.keys(entryFiles).map((index) => {
     const entryFil = entryFiles[index];
     // get the folder name
-    const match = entryFil.match(/src\/(.*)\/index\.js/);
+    const match = entryFil.match(/src\/examples\/(.*)\/index\.js/);
     const pathname = match && match[1];
     //config the entry files
     entry[pathname] = entryFil;
     //config html-webpack-plugin
     htmlWebpackPlugins.push(
       new HtmlWebpackPlugin({
-        template: path.join(__dirname, `src/${pathname}/index.html`),
+        template: path.join(__dirname, `src/examples/${pathname}/index.html`),
         filename: `${pathname}.html`,
         chunks: [pathname],
         hash: true,
@@ -47,6 +49,7 @@ const { entry, htmlWebpackPlugins } = setMpa();
 // console.log(entry);
 module.exports = {
   mode: "development",
+  // mode: "production",
   // for build
   entry: entry,
   output: {
@@ -54,6 +57,18 @@ module.exports = {
     filename: "[name].ABI.js",
   },
   plugins: [new CleanWebpackPlugin()].concat(htmlWebpackPlugins),
+  optimization: {
+    // 为了方便阅读理解打包后的代码，关闭代码压缩和模块合并
+    // minimize: false,
+    // concatenateModules: false,
+    minimize: true,
+    concatenateModules: true,
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
 
   // for dev
   // entry: {
@@ -99,6 +114,24 @@ module.exports = {
         options: {
           esModule: false,
         },
+      },
+      {
+        test: /\.(dcm)(\?.*)?$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 1024 * 4,
+              esModule: false,
+              fallback: {
+                loader: require.resolve("file-loader"),
+                options: {
+                  outputPath: "images",
+                },
+              },
+            },
+          },
+        ],
       },
     ],
   },

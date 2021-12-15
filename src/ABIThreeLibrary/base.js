@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-function createCamera(type, aspect, fov = 75, near = 1, far = 1000, s = 100) {
+function createCamera(type, aspect, fov = 75, near = 1, far = 1000, s = 500) {
   let camera = null;
   if (type) {
     camera = new THREE.PerspectiveCamera(fov, aspect, near, far);

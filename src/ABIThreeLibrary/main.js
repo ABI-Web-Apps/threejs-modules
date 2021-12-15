@@ -1,25 +1,22 @@
 import * as THREE from "three";
 import Stats from "three/examples/jsm/libs/stats.module.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { GUI } from "three/examples/jsm/libs/lil-gui.module.min.js";
+import { GUI } from "lil-gui";
 import { createCamera, createLight } from "./base.js";
 import { buildGUI } from "./gui.js";
-import {
-  loadImage,
-  loadObjFile,
-  loadMTLFile,
-  loadGLTFFile,
-} from "./loadModules";
+import ImageLoader from "./imageLoader.js";
+import { loadObjFile, loadMTLFile, loadGLTFFile } from "./loadModules";
 
 function initThreeD(canvas) {
-  // Get scene
-  let scene = new THREE.Scene();
-
+  // let canvas = document.createElement("canvas");
   const renderer = new THREE.WebGLRenderer({
     antialias: true, //enable antialias
     canvas,
   });
+  // container.appendChild(renderer.domElement);
 
+  // Get scene
+  let scene = new THREE.Scene();
   // light
   const { pointLight, ambientLight } = createLight(0xffffff, 1);
   scene.add(pointLight);
@@ -28,8 +25,9 @@ function initThreeD(canvas) {
 
   // get camera
   const aspect = canvas.clientWidth / canvas.clientHeight;
+  // let camera = createCamera(true, aspect);
   let camera = createCamera(true, aspect);
-  camera.lookAt(scene.position);
+  // camera.lookAt(scene.position);
 
   const gui = new GUI();
   const controler_flag = {
@@ -44,7 +42,7 @@ function initThreeD(canvas) {
   };
   buildGUI(gui, controlers, controler_flag);
 
-  function resizeRenderTosiplaySize(renderer) {
+  function resizeRenderTodsiplaySize(renderer) {
     const canvas = renderer.domElement;
     const pixelRatio = window.devicePixelRatio;
     const width = (canvas.clientWidth * pixelRatio) | 0;
@@ -61,7 +59,7 @@ function initThreeD(canvas) {
   document.body.appendChild(stats.dom);
 
   function render() {
-    if (resizeRenderTosiplaySize(renderer)) {
+    if (resizeRenderTodsiplaySize(renderer)) {
       const canvas = renderer.domElement;
       camera.aspect = canvas.width / canvas.height;
       camera.updateProjectionMatrix();
@@ -80,7 +78,7 @@ function initThreeD(canvas) {
   controls.target.set(0, 0, 0);
   controls.update();
 
-  return { scene, camera };
+  return { gui, scene, camera };
 }
 
-export { initThreeD, loadImage, loadObjFile, loadMTLFile, loadGLTFFile };
+export { initThreeD, loadObjFile, loadMTLFile, loadGLTFFile, ImageLoader };
