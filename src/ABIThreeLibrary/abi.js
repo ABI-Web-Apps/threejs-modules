@@ -15,6 +15,7 @@ class ABIThree {
     this.cameras = [];
     this.sceneInfos = [];
     this.gui = new GUI();
+    this.init();
   }
 
   init() {
@@ -36,5 +37,29 @@ class ABIThree {
       this.cameras.push(sceneInfo.camera);
       this.sceneInfos.push(sceneInfo);
     }
+    renderSceneInfo = (sceneInfo) => {
+      const { scene, camera, controls, elem } = sceneInfo;
+
+      // get the viewpoint relative position of this element
+      const { left, right, top, bottom, width, height } =
+        elem.getBoundingClientRect();
+      const isOffscreen =
+        bottom < 0 ||
+        top > this.renderer.domElement.clientHeight ||
+        right < 0 ||
+        left > this.renderer.domElement.clientWidth;
+      if (isOffscreen) {
+        return;
+      }
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      controls.handleResize();
+      controls.update();
+
+      const positiveYUpBottom = this.renderer.domElement.clientHeight - bottom;
+      this.renderer.setScissor(left, positiveYUpBottom, width, height);
+      this.renderer.setViewport(left, positiveYUpBottom, width, height);
+      this.renderer.render(scene, camera);
+    };
   }
 }
