@@ -16,6 +16,7 @@ class ABIThree {
     this.sceneInfos = [];
     this.gui = new GUI();
     this.init();
+    this.animate();
   }
 
   init() {
@@ -38,31 +39,32 @@ class ABIThree {
       this.cameras.push(sceneInfo.camera);
       this.sceneInfos.push(sceneInfo);
     }
-    renderSceneInfo = (sceneInfo) => {
-      const { scene, camera, controls, elem } = sceneInfo;
-
-      // get the viewpoint relative position of this element
-      const { left, right, top, bottom, width, height } =
-        elem.getBoundingClientRect();
-      const isOffscreen =
-        bottom < 0 ||
-        top > this.renderer.domElement.clientHeight ||
-        right < 0 ||
-        left > this.renderer.domElement.clientWidth;
-      if (isOffscreen) {
-        return;
-      }
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-      controls.handleResize();
-      controls.update();
-
-      const positiveYUpBottom = this.renderer.domElement.clientHeight - bottom;
-      this.renderer.setScissor(left, positiveYUpBottom, width, height);
-      this.renderer.setViewport(left, positiveYUpBottom, width, height);
-      this.renderer.render(scene, camera);
-    };
   }
+
+  renderSceneInfo = (sceneInfo) => {
+    const { scene, camera, controls, elem } = sceneInfo;
+
+    // get the viewpoint relative position of this element
+    const { left, right, top, bottom, width, height } =
+      elem.getBoundingClientRect();
+    const isOffscreen =
+      bottom < 0 ||
+      top > this.renderer.domElement.clientHeight ||
+      right < 0 ||
+      left > this.renderer.domElement.clientWidth;
+    if (isOffscreen) {
+      return;
+    }
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    controls.handleResize();
+    controls.update();
+
+    const positiveYUpBottom = this.renderer.domElement.clientHeight - bottom;
+    this.renderer.setScissor(left, positiveYUpBottom, width, height);
+    this.renderer.setViewport(left, positiveYUpBottom, width, height);
+    this.renderer.render(scene, camera);
+  };
   resizeRendererToDisplaySize = () => {
     const width = this.renderer.domElement.clientWidth;
     const height = this.renderer.domElement.clientHeight;
@@ -89,7 +91,7 @@ class ABIThree {
     this.renderer.setScissorTest(false);
     this.renderer.setClearColor(clearColor, 0);
     this.renderer.clear(true, true);
-    this.setScissorTest(true);
+    this.renderer.setScissorTest(true);
     this.resizeRendererToDisplaySize();
 
     for (let info of this.sceneInfos) {
