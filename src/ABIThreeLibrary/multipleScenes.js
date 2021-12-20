@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { TrackballControls } from "three/examples/jsm/controls/TrackballControls";
 
-export default function makeScene(elem, cameraPosition = { x: 0, y: 0, z: 5 }) {
+export default function makeScene(elem, cameraPosition) {
   const scene = new THREE.Scene();
 
   const fov = 75;
