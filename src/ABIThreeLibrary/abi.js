@@ -25,6 +25,7 @@ class ABIThree {
     });
     this.canvas = this.renderer.domElement;
     this.canvas.className = "c";
+    this.container.className = "container_root";
     this.container.appendChild(this.canvas);
     for (let i = 0; i < this.sceneNum; i++) {
       const elem = document.createElement("div");
