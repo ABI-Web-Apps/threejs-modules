@@ -25,4 +25,12 @@ function createLight(color, intensity) {
   return { pointLight, ambientLight };
 }
 
-export { createCamera, createLight };
+function createTestMesh(sceneInfo) {
+  const geometry = new THREE.BoxGeometry(1, 1, 1);
+  const material = new THREE.MeshPhongMaterial({ color: "red" });
+  const mesh = new THREE.Mesh(geometry, material);
+  sceneInfo.mesh = mesh;
+  sceneInfo.scene.add(mesh);
+}
+
+export { createCamera, createLight, createTestMesh };

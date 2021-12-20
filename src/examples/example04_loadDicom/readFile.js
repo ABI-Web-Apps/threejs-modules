@@ -25,8 +25,8 @@ function readFileName(dir, filesList = []) {
 }
 
 function writeJson() {
-  // const filesList = readFileName("../assets/images/dicom4/series-00001/");
-  const filesList = readFileName("../assets/images/dicom1/");
+  const filesList = readFileName("../assets/images/dicom1");
+  // const filesList = readFileName("../assets/images/dicom4/series-00002");
   console.log(filesList);
   const data = JSON.stringify(filesList, null, 4);
   try {

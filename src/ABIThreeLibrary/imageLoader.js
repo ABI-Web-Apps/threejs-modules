@@ -54,6 +54,8 @@ class ImageLoader {
         // this image during gui interactions.
         this.stackHelper.slice.mesh.name = this.label;
         // this.stackHelper.slice.mesh.position.set(0, 0, 0);
+        console.log("stackHelper", this.stackHelper.position);
+        console.log("mesh", this.stackHelper.slice.mesh.position);
 
         this.camera.lookAt(this.stackHelper.position);
         loader.free();
@@ -82,7 +84,7 @@ class ImageLoader {
 
   addGUI(stackHelper) {
     const stack = stackHelper.stack;
-
+    console.log(this.gui);
     const stackFolder = this.gui.addFolder("Stack");
     // index range depends on stackHelper orientation.
 
