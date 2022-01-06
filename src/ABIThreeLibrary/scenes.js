@@ -1,11 +1,11 @@
 import * as THREE from "three";
 import { GUI } from "lil-gui";
 import { createCamera, createLight, createTestMesh } from "./base";
+import { TrackballControls } from "three/examples/jsm/controls/TrackballControls";
 import ImageLoader from "./imageLoader";
-import makeScene from "./multipleScenes";
 import "./css/style.css";
 
-class ABIThree {
+class Scenes {
   constructor(container, numberOfScene, cameraPosition) {
     this.numberOfScene = numberOfScene || 1;
     this.container = container;
@@ -14,7 +14,7 @@ class ABIThree {
     this.scenes = [];
     this.cameras = [];
     this.sceneInfos = [];
-    this.gui = new GUI();
+    // this.gui = new GUI();
     this.init();
     this.animate();
   }
@@ -33,12 +33,53 @@ class ABIThree {
       this.container.appendChild(elem);
       this.elems.push(elem);
       //   scene id
-      const sceneInfo = makeScene(elem, this.cameraPosition);
+      const sceneInfo = this.makeScene(elem, this.cameraPosition);
 
+      sceneInfo.id = i;
       sceneInfo.elem = elem;
+      sceneInfo.gui = new GUI();
       this.scenes.push(sceneInfo.scene);
       this.cameras.push(sceneInfo.camera);
       this.sceneInfos.push(sceneInfo);
+    }
+  }
+
+  makeScene(elem, cameraPosition) {
+    const scene = new THREE.Scene();
+
+    const fov = 75;
+    const aspect = elem.clientWidth / elem.clientHeight;
+    const near = 0.1;
+    const far = 500;
+
+    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+
+    camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
+    camera.lookAt(scene.position);
+    scene.add(camera);
+    const controls = new TrackballControls(camera, elem);
+    // light
+    {
+      const color = 0xffffff;
+      const intensity = 1;
+      const light = new THREE.DirectionalLight(color, intensity);
+      light.position.set(-1, 2, 4);
+      camera.add(light);
+    }
+    scene.background = new THREE.Color("black");
+    return { scene, camera, controls };
+  }
+  /**
+   * Get the scene infomation with the corresponding id by entering the  parameter ID.
+   * @param {Number} id
+   * @returns {Scenes} - If found the id of the scence
+   */
+  getScene(id = 0) {
+    const scene = this.sceneInfos.find((element) => element.id === id);
+    if (scene) {
+      return scene;
+    } else {
+      console.log("Oops...No scenes have been found!");
     }
   }
 
@@ -107,4 +148,4 @@ class ABIThree {
   };
 }
 
-export { ABIThree, ImageLoader, createTestMesh };
+export { Scenes, ImageLoader, createTestMesh };
