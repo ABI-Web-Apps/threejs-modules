@@ -23,3 +23,8 @@ body {
 .container_root > div {
   border: 1px solid grey;
 }
+
+.force-touch-styles {
+  position: fixed;
+  z-index: 1000;
+}

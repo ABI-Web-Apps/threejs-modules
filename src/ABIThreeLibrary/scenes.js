@@ -7,7 +7,7 @@ import "./css/style.css";
 
 class Scenes {
   constructor(container, numberOfScene, cameraPosition) {
-    this.numberOfScene = numberOfScene || 1;
+    this.numberOfScene = numberOfScene > 0 ? numberOfScene : 1;
     this.container = container;
     this.cameraPosition = cameraPosition || { x: 0, y: 0, z: 5 };
     this.elems = [];
@@ -30,14 +30,23 @@ class Scenes {
     this.container.appendChild(this.canvas);
     for (let i = 0; i < this.numberOfScene; i++) {
       const elem = document.createElement("div");
+      elem.className = "abithree_scene_div";
       this.container.appendChild(elem);
+
       this.elems.push(elem);
       //   scene id
-      const sceneInfo = this.makeScene(elem, this.cameraPosition);
 
+      const sceneInfo = this.makeScene(elem, this.cameraPosition);
+      //   const gui = new GUI({ autoPlace: true, container: elem });
+      const gui = new GUI({ container: elem });
+      // const zz = gui.addFolder("zz");
+      // zz.add({ Slider: 0 }, "Slider", 0, 1).disable().enable();
+      gui.domElement.classList.add("force-touch-styles");
+
+      // const sceneInfo = {};
       sceneInfo.id = i;
       sceneInfo.elem = elem;
-      sceneInfo.gui = new GUI();
+      sceneInfo.gui = gui;
       this.scenes.push(sceneInfo.scene);
       this.cameras.push(sceneInfo.camera);
       this.sceneInfos.push(sceneInfo);
@@ -58,6 +67,7 @@ class Scenes {
     camera.lookAt(scene.position);
     scene.add(camera);
     const controls = new TrackballControls(camera, elem);
+    controls.enabled = false;
     // light
     {
       const color = 0xffffff;
@@ -67,6 +77,7 @@ class Scenes {
       camera.add(light);
     }
     scene.background = new THREE.Color("black");
+
     return { scene, camera, controls };
   }
   /**
@@ -137,9 +148,27 @@ class Scenes {
     this.renderer.setScissorTest(true);
     this.resizeRendererToDisplaySize();
 
-    for (let info of this.sceneInfos) {
+    // for (let info of this.sceneInfos) {
+    // }
+    this.sceneInfos.forEach((info) => {
       this.renderSceneInfo(info);
-    }
+    });
+    const infos = this.sceneInfos;
+    var el = window.document.body; //set default value is body
+    window.document.body.onmouseover = function (event) {
+      el = event.target.className; //when mouse over which element then get the element classname
+      if (el === "abithree_scene_div") {
+        infos.forEach((info) => {
+          info.controls.enabled = true;
+          info.controls.update();
+        });
+      } else {
+        infos.forEach((info) => {
+          info.controls.enabled = false;
+          info.controls.update();
+        });
+      }
+    };
 
     const transform = `translateY(${window.scrollY}px)`;
     this.renderer.domElement.style.transform = transform;
