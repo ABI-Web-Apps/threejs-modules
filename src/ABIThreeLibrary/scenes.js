@@ -1,15 +1,13 @@
 import * as THREE from "three";
+import { createLight } from "./base";
 import { GUI } from "lil-gui";
-import { createCamera, createLight, createTestMesh } from "./base";
 import { TrackballControls } from "three/examples/jsm/controls/TrackballControls";
-import ImageLoader from "./imageLoader";
-import "./css/style.css";
 
-class Scenes {
+export default class Scenes {
   constructor(container, numberOfScene, cameraPosition) {
     this.numberOfScene = numberOfScene > 0 ? numberOfScene : 1;
     this.container = container;
-    this.cameraPosition = cameraPosition || { x: 0, y: 0, z: 5 };
+    this.cameraPosition = cameraPosition || { x: 0, y: 0, z: 500 };
     this.elems = [];
     this.scenes = [];
     this.cameras = [];
@@ -34,16 +32,11 @@ class Scenes {
       this.container.appendChild(elem);
 
       this.elems.push(elem);
-      //   scene id
-
-      const sceneInfo = this.makeScene(elem, this.cameraPosition);
-      //   const gui = new GUI({ autoPlace: true, container: elem });
       const gui = new GUI({ container: elem });
-      // const zz = gui.addFolder("zz");
-      // zz.add({ Slider: 0 }, "Slider", 0, 1).disable().enable();
       gui.domElement.classList.add("force-touch-styles");
 
-      // const sceneInfo = {};
+      const sceneInfo = this.makeScene(elem, this.cameraPosition);
+      //   scene id
       sceneInfo.id = i;
       sceneInfo.elem = elem;
       sceneInfo.gui = gui;
@@ -59,7 +52,7 @@ class Scenes {
     const fov = 75;
     const aspect = elem.clientWidth / elem.clientHeight;
     const near = 0.1;
-    const far = 500;
+    const far = 1000;
 
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
@@ -72,9 +65,12 @@ class Scenes {
     {
       const color = 0xffffff;
       const intensity = 1;
-      const light = new THREE.DirectionalLight(color, intensity);
-      light.position.set(-1, 2, 4);
-      camera.add(light);
+      const light = createLight(color, intensity);
+      scene.add(light.pointLight);
+
+      const cameraLight = new THREE.DirectionalLight(color, intensity);
+      cameraLight.position.set(-1, 2, 4);
+      camera.add(cameraLight);
     }
     scene.background = new THREE.Color("black");
 
@@ -176,5 +172,3 @@ class Scenes {
     window.requestAnimationFrame(this.animate);
   };
 }
-
-export { Scenes, ImageLoader, createTestMesh };

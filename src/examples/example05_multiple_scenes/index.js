@@ -2,10 +2,9 @@ import {
   Scenes,
   ImageLoader,
   createTestMesh,
-} from "../../ABIThreeLibrary/scenes";
+} from "../../ABIThreeLibrary/main";
 import data from "./dicom.json";
 import "./mystyle.css";
-import { GUI } from "lil-gui";
 
 const container = document.querySelector("#container_root");
 const allScenes = new Scenes(container, 3);

@@ -3,8 +3,10 @@ import "../assets/css/style.css";
 import data from "./dicom.json";
 // import { readFileList } from "../ABIThreeLibrary/utils/readFiles";
 
-let canvas = document.getElementById("bg");
-let { gui, scene, camera } = ABIThree.initThreeD(canvas);
+let container = document.getElementById("container_root");
+let allScenes = new ABIThree.Scenes(container, 1);
+
+const scence1 = allScenes.getScene();
 
 // console.log(z);
 let dicom_file_paths = [];
@@ -16,10 +18,10 @@ let imageLoader = new ABIThree.ImageLoader(
   "Image",
   dicom_file_paths,
   this,
-  scene,
-  camera,
-  gui,
-  canvas
+  scence1.scene,
+  scence1.camera,
+  scence1.gui,
+  scence1.elem
 );
 
 imageLoader.viewImage();

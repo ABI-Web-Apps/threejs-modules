@@ -17,7 +17,7 @@ function getMaterial() {
   return new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
 }
 
-function loadObjFile(url, scene, camera, progressBar, material = null) {
+function loadObjFile(url, scene, camera, progressBar = null, material = null) {
   const objLoader = new OBJLoader();
   !!material & objLoader.setMaterials(material);
   objLoader.load(
@@ -35,7 +35,9 @@ function loadObjFile(url, scene, camera, progressBar, material = null) {
     },
     (xhr) => {
       //   console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-      loadingBar(xhr, progressBar);
+      if (progressBar) {
+        loadingBar(xhr, progressBar);
+      }
     },
     (error) => {
       console.error(error);
@@ -43,7 +45,7 @@ function loadObjFile(url, scene, camera, progressBar, material = null) {
   );
 }
 
-function loadMTLFile(url_mtl, url_obj, scene, camera, progressBar) {
+function loadMTLFile(url_mtl, url_obj, scene, camera, progressBar = null) {
   const mtlLoader = new MTLLoader();
   mtlLoader.load(url_mtl, (material) => {
     material.preload();
@@ -52,7 +54,7 @@ function loadMTLFile(url_mtl, url_obj, scene, camera, progressBar) {
 }
 
 // load Gltf file
-function loadGLTFFile(url, scene, camera, progressBar) {
+function loadGLTFFile(url, scene, camera, progressBar = null) {
   const gltfLoader = new GLTFLoader();
   gltfLoader.load(
     url,
@@ -63,7 +65,9 @@ function loadGLTFFile(url, scene, camera, progressBar) {
     },
     (xhr) => {
       // console.log((xhr.loaded / contentLength) * 100 + "% loaded");
-      loadingBar(xhr, progressBar);
+      if (progressBar) {
+        loadingBar(xhr, progressBar);
+      }
     },
     (error) => {
       console.error(error);

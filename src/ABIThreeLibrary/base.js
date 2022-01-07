@@ -26,7 +26,7 @@ function createLight(color, intensity) {
 }
 
 function createTestMesh(sceneInfo) {
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
+  const geometry = new THREE.BoxGeometry(100, 100, 100);
   const material = new THREE.MeshPhongMaterial({ color: "red" });
   const mesh = new THREE.Mesh(geometry, material);
   sceneInfo.mesh = mesh;

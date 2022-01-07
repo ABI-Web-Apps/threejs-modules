@@ -2,11 +2,17 @@ import * as ABIThree from "../../ABIThreeLibrary/main";
 import "../assets/css/style.css";
 import monkey_g from "../assets/modules/monkey_g.obj";
 import monkey_m from "../assets/modules/monkey_m.mtl";
-// import { Something } from "./assets/modules/model.js";
-// import "./assets/modules/testglb.js";
 
-let canvas = document.getElementById("bg");
+let container = document.getElementById("container_root");
 let progressBar = document.getElementById("progressBar");
-let { scene, camera } = ABIThree.initThreeD(canvas);
+let allScenes = new ABIThree.Scenes(container);
 
-ABIThree.loadMTLFile(monkey_m, monkey_g, scene, camera, progressBar);
+const scene1 = allScenes.getScene();
+
+ABIThree.loadMTLFile(
+  monkey_m,
+  monkey_g,
+  scene1.scene,
+  scene1.camera,
+  progressBar
+);
