@@ -2,7 +2,7 @@ import * as THREE from "three";
 import Stats from "three/examples/jsm/libs/stats.module.js";
 import { GUI } from "lil-gui";
 import { createCamera, createLight, createTestMesh } from "./base.js";
-import { buildGUI } from "./gui.js";
+import { ColorGUIHelper, CameraHelper } from "./guiHelper.js";
 import ImageLoader from "./imageLoader.js";
 import { loadObjFile, loadMTLFile, loadGLTFFile } from "./loadModules";
 import Scenes from "./scenes.js";
@@ -15,5 +15,6 @@ export {
   loadGLTFFile,
   ImageLoader,
   createTestMesh,
-  buildGUI,
+  ColorGUIHelper,
+  CameraHelper,
 };

@@ -1,13 +1,9 @@
-import {
-  Scenes,
-  ImageLoader,
-  createTestMesh,
-} from "../../ABIThreeLibrary/main";
+import * as ABIThree from "../../ABIThreeLibrary/main";
 import data from "./dicom.json";
 import "./mystyle.css";
 
 const container = document.querySelector("#container_root");
-const allScenes = new Scenes(container, 3);
+const allScenes = new ABIThree.Scenes(container, 3);
 let dicom_file_paths = [];
 for (let item of data) {
   dicom_file_paths.push(require("../assets/images/dicom1/" + item));
@@ -21,7 +17,7 @@ const gui = scene3.gui;
 scene3.camera.position.set(0, 0, 500);
 scene3.camera.far = 1000;
 
-let imageLoader = new ImageLoader(
+let imageLoader = new ABIThree.ImageLoader(
   "Image",
   dicom_file_paths,
   this,
@@ -32,9 +28,30 @@ let imageLoader = new ImageLoader(
 );
 imageLoader.viewImage();
 
+gui.add({ cameraOpen: false }, "cameraOpen").onChange((v) => {
+  if (v) {
+    let camerafolder = gui.addFolder("camera");
+    camerafolder
+      .add(new ABIThree.CameraHelper(scene3.camera.position, "x"), "value")
+      .name("x");
+    camerafolder
+      .add(new ABIThree.CameraHelper(scene3.camera.position, "y"), "value")
+      .name("y");
+    camerafolder
+      .add(new ABIThree.CameraHelper(scene3.camera.position, "z"), "value")
+      .name("z");
+  } else {
+    for (let item of gui.foldersRecursive()) {
+      if (item._title === "camera") {
+        item.destroy();
+      }
+    }
+  }
+});
+
 if (scene3) {
-  createTestMesh(scene1);
-  createTestMesh(scene2);
+  ABIThree.createTestMesh(scene1);
+  ABIThree.createTestMesh(scene2);
 }
 
 const gui2 = scene2.gui;

@@ -16,3 +16,33 @@ ABIThree.loadMTLFile(
   scene1.camera,
   progressBar
 );
+
+const gui = scene1.gui;
+const controler_flag = {
+  cameraOpen: false,
+};
+
+gui.add(controler_flag, "cameraOpen").onChange((v) => {
+  if (v) {
+    let camerafolder = gui.addFolder("camera");
+    camerafolder
+      .add(new ABIThree.CameraHelper(scene1.camera.position, "x"), "value")
+      .name("x");
+    camerafolder
+      .add(new ABIThree.CameraHelper(scene1.camera.position, "y"), "value")
+      .name("y");
+    camerafolder
+      .add(new ABIThree.CameraHelper(scene1.camera.position, "z"), "value")
+      .name("z");
+  } else {
+    for (let item of gui.foldersRecursive()) {
+      if (item._title === "camera") {
+        item.destroy();
+      }
+    }
+  }
+});
+
+gui
+  .addColor(new ABIThree.ColorGUIHelper(scene1.scene, "background"), "value")
+  .name("background_color");

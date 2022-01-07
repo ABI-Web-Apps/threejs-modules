@@ -33,7 +33,7 @@ export default class Scenes {
 
       this.elems.push(elem);
       const gui = new GUI({ container: elem });
-      gui.domElement.classList.add("force-touch-styles");
+      // gui.domElement.classList.add("force-touch-styles");
 
       const sceneInfo = this.makeScene(elem, this.cameraPosition);
       //   scene id

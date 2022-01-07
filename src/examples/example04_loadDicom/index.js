@@ -6,7 +6,7 @@ import data from "./dicom.json";
 let container = document.getElementById("container_root");
 let allScenes = new ABIThree.Scenes(container, 1);
 
-const scence1 = allScenes.getScene();
+const scene1 = allScenes.getScene();
 
 // console.log(z);
 let dicom_file_paths = [];
@@ -18,10 +18,40 @@ let imageLoader = new ABIThree.ImageLoader(
   "Image",
   dicom_file_paths,
   this,
-  scence1.scene,
-  scence1.camera,
-  scence1.gui,
-  scence1.elem
+  scene1.scene,
+  scene1.camera,
+  scene1.gui,
+  scene1.elem
 );
 
 imageLoader.viewImage();
+
+const gui = scene1.gui;
+const controler_flag = {
+  cameraOpen: false,
+};
+
+gui.add(controler_flag, "cameraOpen").onChange((v) => {
+  if (v) {
+    let camerafolder = gui.addFolder("camera");
+    camerafolder
+      .add(new ABIThree.CameraHelper(scene1.camera.position, "x"), "value")
+      .name("x");
+    camerafolder
+      .add(new ABIThree.CameraHelper(scene1.camera.position, "y"), "value")
+      .name("y");
+    camerafolder
+      .add(new ABIThree.CameraHelper(scene1.camera.position, "z"), "value")
+      .name("z");
+  } else {
+    for (let item of gui.foldersRecursive()) {
+      if (item._title === "camera") {
+        item.destroy();
+      }
+    }
+  }
+});
+
+gui
+  .addColor(new ABIThree.ColorGUIHelper(scene1.scene, "background"), "value")
+  .name("background_color");

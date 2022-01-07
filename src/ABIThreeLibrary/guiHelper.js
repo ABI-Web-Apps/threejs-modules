@@ -1,7 +1,7 @@
 // import * as THREE from "../three/build/three.module.js";
 import * as THREE from "three";
 
-class ColorGUIHelper {
+export class ColorGUIHelper {
   constructor(object, prop) {
     this.object = object;
     this.prop = prop;
@@ -15,7 +15,7 @@ class ColorGUIHelper {
   }
 }
 
-class CameraHelper {
+export class CameraHelper {
   constructor(object, prop) {
     this.object = object;
     this.prop = prop;
@@ -49,13 +49,6 @@ function buildGUI(gui, controlers, controler_flag) {
       }
     }
   });
-  // light gui folder
-  {
-    const lightFolder = gui.addFolder("Light");
-    lightFolder.add(controlers.pointLight, "visible").name("pointLight");
-    lightFolder.add(controlers.ambientLight, "visible").name("ambientLight");
-    lightFolder.close();
-  }
   {
     // renderer
     const renderFolder = gui.addFolder("Render");
