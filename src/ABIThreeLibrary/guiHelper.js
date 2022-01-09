@@ -1,4 +1,3 @@
-// import * as THREE from "../three/build/three.module.js";
 import * as THREE from "three";
 
 export class ColorGUIHelper {
@@ -27,43 +26,3 @@ export class CameraHelper {
     this.object[this.prop] = v;
   }
 }
-
-function buildGUI(gui, controlers, controler_flag) {
-  gui.add(controler_flag, "cameraOpen").onChange((v) => {
-    if (v) {
-      let camerafolder = gui.addFolder("camera");
-      camerafolder
-        .add(new CameraHelper(controlers.camera.position, "x"), "value")
-        .name("x");
-      camerafolder
-        .add(new CameraHelper(controlers.camera.position, "y"), "value")
-        .name("y");
-      camerafolder
-        .add(new CameraHelper(controlers.camera.position, "z"), "value")
-        .name("z");
-    } else {
-      for (let item of gui.foldersRecursive()) {
-        if (item._title === "camera") {
-          item.destroy();
-        }
-      }
-    }
-  });
-  {
-    // renderer
-    const renderFolder = gui.addFolder("Render");
-    renderFolder
-      .add(controlers.renderer, "physicallyCorrectLights")
-      .name("Physic light");
-    renderFolder
-      .add(controlers.renderer.shadowMap, "enabled")
-      .name("shadowMap");
-    renderFolder.close();
-  }
-
-  gui
-    .addColor(new ColorGUIHelper(controlers.scene, "background"), "value")
-    .name("background_color");
-}
-
-export { buildGUI };

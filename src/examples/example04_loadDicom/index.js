@@ -55,3 +55,5 @@ gui.add(controler_flag, "cameraOpen").onChange((v) => {
 gui
   .addColor(new ABIThree.ColorGUIHelper(scene1.scene, "background"), "value")
   .name("background_color");
+
+allScenes.animate();

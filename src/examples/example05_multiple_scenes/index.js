@@ -69,3 +69,5 @@ colorString("0xaa00Ff");
 colorString("#a0f");
 colorString("a0f");
 colorString("rgb(170, 0, 255)");
+
+allScenes.animate();

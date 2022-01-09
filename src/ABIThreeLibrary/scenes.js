@@ -3,28 +3,74 @@ import { createLight } from "./base";
 import { GUI } from "lil-gui";
 import { TrackballControls } from "three/examples/jsm/controls/TrackballControls";
 
+/**
+ * @module Scenes
+ */
+
+/**
+ * Base class for making multiple scenes, it includes webGLRender, camera information, three.js controls.
+ * The default number of scene is one, and the default camera position is { x: 0, y: 0, z: 500 }.
+ * @example
+ * const allScenes = new Scenes(HTMLElement, 4, {0, 0, 1000});
+ * allScenes.animate();
+ */
 export default class Scenes {
   constructor(container, numberOfScene, cameraPosition) {
+    /**
+     * How many scenes the user want to create.
+     * @type {number}
+     * */
     this.numberOfScene = numberOfScene > 0 ? numberOfScene : 1;
+    /**
+     * The main container for all scenes
+     * @type {HTMLElement}
+     */
     this.container = container;
+    /**
+     * The camera postion, it is a object and the format is {x:number, y:number, z:number}
+     * @type {object}
+     * @example
+     * { x: 0, y: 0, z: 1000 }
+     */
     this.cameraPosition = cameraPosition || { x: 0, y: 0, z: 500 };
+    /**
+     * It stores all scenes' parent domElements.
+     * @type {Array}
+     */
     this.elems = [];
+    /**
+     * It stores all scenes.
+     * @type {Array}
+     */
     this.scenes = [];
+    /**
+     * It stores all camera information.
+     * @type {Array}
+     */
     this.cameras = [];
+    /**
+     * It stores all scenes' information. Each scene's info includes scene's ID, scene,camera, domElement, controls, GUI.
+     */
     this.sceneInfos = [];
-    // this.gui = new GUI();
+
     this.init();
-    this.animate();
+    // this.animate();
   }
 
+  /**
+   * The initial function.
+   * It will create a WebGLRenderer, and depends on the number of scenes to create each scene and it's parent domElement.
+   * And it also can automatically create gui for each scene.
+   * All the informations will be stored in the sceneInfo object, such as:  scene,camera, domElement, controls, GUI.
+   */
   init() {
     this.renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: true,
     });
     this.canvas = this.renderer.domElement;
-    this.canvas.className = "c";
-    this.container.className = "container_root";
+    this.canvas.className = "abithree_canvas";
+    this.container.className = "abithree_container_root";
     this.container.appendChild(this.canvas);
     for (let i = 0; i < this.numberOfScene; i++) {
       const elem = document.createElement("div");
@@ -33,10 +79,7 @@ export default class Scenes {
 
       this.elems.push(elem);
       const gui = new GUI({ container: elem });
-      // gui.domElement.classList.add("force-touch-styles");
-
       const sceneInfo = this.makeScene(elem, this.cameraPosition);
-      //   scene id
       sceneInfo.id = i;
       sceneInfo.elem = elem;
       sceneInfo.gui = gui;
@@ -45,7 +88,12 @@ export default class Scenes {
       this.sceneInfos.push(sceneInfo);
     }
   }
-
+  /**
+   * This functions is for init function to create multiple scenes.
+   * @param {HTMLElement} elem - the scene parent domElement.
+   * @param {object} cameraPosition - the cameraPostion
+   * @returns {scene, camera, controls}
+   */
   makeScene(elem, cameraPosition) {
     const scene = new THREE.Scene();
 
@@ -90,6 +138,11 @@ export default class Scenes {
     }
   }
 
+  /**
+   * This function is for render all scenes on canvas.
+   * @param {object} sceneInfo
+   * @returns
+   */
   renderSceneInfo = (sceneInfo) => {
     const { scene, camera, controls, elem } = sceneInfo;
 
@@ -114,6 +167,10 @@ export default class Scenes {
     this.renderer.setViewport(left, positiveYUpBottom, width, height);
     this.renderer.render(scene, camera);
   };
+
+  /**
+   * This method causes the layout of the canvas to change responsively with the user's window.
+   */
   resizeRendererToDisplaySize = () => {
     const width = this.renderer.domElement.clientWidth;
     const height = this.renderer.domElement.clientHeight;
@@ -135,6 +192,12 @@ export default class Scenes {
       this.renderer.setSize(width, height, false);
     }
   };
+
+  /**
+   * This function is for create animation and render the canvas.
+   *
+   * @param {number} time
+   */
   animate = (time) => {
     time *= 0.001;
     const clearColor = new THREE.Color("#000");

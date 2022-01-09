@@ -5,7 +5,7 @@ body {
   /*z-index: -999;*/
 }
 
-.c {
+.abithree_canvas {
   position: absolute;
   left: 0;
   top: 0;
@@ -14,13 +14,13 @@ body {
   display: block;
   z-index: -1;
 }
-.container_root {
+.abithree_container_root {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
-.container_root > div {
+.abithree_container_root > div {
   border: 1px solid grey;
 }
 

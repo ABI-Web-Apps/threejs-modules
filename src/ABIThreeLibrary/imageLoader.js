@@ -75,6 +75,8 @@ class ImageLoader {
   //     this.camera = camera;
   //   }
   viewImage() {
+    console.log("this:", this.container);
+
     this.imageLoader(this.path).then(() => {
       this.addGUI(this.stackHelper);
       this.scene.add(this.stackHelper);
@@ -91,20 +93,8 @@ class ImageLoader {
       .add(stackHelper, "index", 0, stack.dimensionsIJK.z - 1)
       .step(1)
       .name("ImageLayer");
+
     stackFolder.open();
-
-    // const zz = this.gui.addFolder("zz");
-    // zz.add({ Slider: 0 }, "Slider", 0, 1).disable().enable();
-    // const color = this.gui.addFolder("color");
-    // const colorString = (str) =>
-    //   color.addColor({ x: str }, "x").name(`"${str}"`);
-
-    // colorString("#aa00Ff");
-    // colorString("aa00Ff");
-    // colorString("0xaa00Ff");
-    // colorString("#a0f");
-    // colorString("a0f");
-    // colorString("rgb(170, 0, 255)");
   }
 }
 
