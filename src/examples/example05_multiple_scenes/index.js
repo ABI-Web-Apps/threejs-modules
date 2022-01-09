@@ -20,11 +20,11 @@ scene3.camera.far = 1000;
 let imageLoader = new ABIThree.ImageLoader(
   "Image",
   dicom_file_paths,
-  this,
   scene3.scene,
   scene3.camera,
+  scene3.elem,
   gui,
-  scene3.elem
+  this
 );
 imageLoader.viewImage();
 

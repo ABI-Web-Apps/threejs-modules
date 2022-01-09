@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "serve": "webpack serve --open --host 127.0.0.1 --port 3000"
+    "serve": "webpack serve --open --host 127.0.0.1 --port 3000",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",
@@ -46,6 +47,7 @@
     "ami.js": "^0.33.0",
     "glob": "^7.2.0",
     "jquery": "^3.6.0",
+    "jsdoc": "^3.6.7",
     "lil-gui": "^0.16.0",
     "three": "0.119.0"
   }
