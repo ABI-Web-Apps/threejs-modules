@@ -9,7 +9,7 @@ let allScenes = new ABIThree.Scenes(container);
 const scene1 = allScenes.getScene();
 
 // load obj module
-ABIThree.loadObjFile(monkey_g, scene1.scene, scene1.camera, progressBar);
+ABIThree.loadObjFile(monkey_g, scene1.scene, scene1.camera, null, progressBar);
 
 const gui = scene1.gui;
 const controler_flag = {

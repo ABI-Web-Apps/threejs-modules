@@ -17,11 +17,11 @@ for (let item of data) {
 let imageLoader = new ABIThree.ImageLoader(
   "Image",
   dicom_file_paths,
-  this,
   scene1.scene,
   scene1.camera,
+  scene1.elem,
   scene1.gui,
-  scene1.elem
+  this
 );
 
 imageLoader.viewImage();

@@ -49,6 +49,7 @@ function getMaterial() {
 function loadObjFile(url, scene, camera, material = null, progressBar = null) {
   const objLoader = new OBJLoader();
   !!material & objLoader.setMaterials(material);
+
   objLoader.load(
     url,
     (object) => {
@@ -98,6 +99,7 @@ function loadObjFile(url, scene, camera, material = null, progressBar = null) {
  */
 function loadMTLFile(url_mtl, url_obj, scene, camera, progressBar = null) {
   const mtlLoader = new MTLLoader();
+
   mtlLoader.load(url_mtl, (material) => {
     material.preload();
     loadObjFile(url_obj, scene, camera, material, progressBar);
@@ -110,6 +112,7 @@ function loadMTLFile(url_mtl, url_obj, scene, camera, progressBar = null) {
  * @param {*} scene - the current domElement's scene
  * @param {*} camera - the current scene's camera
  * @param {*} progressBar - the progress html domelment bar for loading.(optional)
+ *
  * @example
  * const container = document.getElementById("container_root");
  * const progressBar = document.getElementById("progressBar");
@@ -121,11 +124,11 @@ function loadMTLFile(url_mtl, url_obj, scene, camera, progressBar = null) {
  */
 function loadGLTFFile(url, scene, camera, progressBar = null) {
   const gltfLoader = new GLTFLoader();
+
   gltfLoader.load(
     url,
     (gltf) => {
       camera.position.z = gltf.scene.position.z + 10;
-
       scene.add(gltf.scene);
     },
     (xhr) => {

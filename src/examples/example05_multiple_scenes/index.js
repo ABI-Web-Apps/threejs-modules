@@ -1,5 +1,6 @@
 import * as ABIThree from "../../ABIThreeLibrary/main";
 import data from "./dicom.json";
+import monkey from "../assets/modules/monkey.glb";
 import "./mystyle.css";
 
 const container = document.querySelector("#container_root");
@@ -51,8 +52,9 @@ gui.add({ cameraOpen: false }, "cameraOpen").onChange((v) => {
 
 if (scene3) {
   ABIThree.createTestMesh(scene1);
-  ABIThree.createTestMesh(scene2);
 }
+ABIThree.loadGLTFFile(monkey, scene2.scene, scene2.camera);
+console.log(scene2.scene);
 
 const gui2 = scene2.gui;
 const gui3 = scene1.gui;

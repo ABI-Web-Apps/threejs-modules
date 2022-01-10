@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { createLight } from "./base";
 import { GUI } from "lil-gui";
 import { TrackballControls } from "three/examples/jsm/controls/TrackballControls";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 /**
  * @module Scenes
@@ -108,7 +109,8 @@ class Scenes {
     camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
     camera.lookAt(scene.position);
     scene.add(camera);
-    const controls = new TrackballControls(camera, elem);
+    // const controls = new TrackballControls(camera, elem);
+    const controls = new OrbitControls(camera, elem);
     controls.enabled = false;
     // light
     {
@@ -164,7 +166,7 @@ class Scenes {
     }
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    controls.handleResize();
+    // controls.handleResize();
     controls.update();
 
     const positiveYUpBottom = this.renderer.domElement.clientHeight - bottom;
