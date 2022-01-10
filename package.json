@@ -1,0 +1,58 @@
+{
+  "name": "abithree-modules",
+  "version": "1.0.0",
+  "description": "## How to use:",
+  "main": "./src/ABIThreeLibrary/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "serve": "webpack serve --open --host 127.0.0.1 --port 3000",
+    "build:abi": "webpack -c webpack.config.production.js",
+    "doc": "jsdoc -c jsdoc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LinkunGao/threejs-modules.git"
+  },
+  "keywords": [],
+  "author": "Auckland Bioengineering Institute",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LinkunGao/threejs-modules/issues"
+  },
+  "homepage": "https://github.com/LinkunGao/threejs-modules#readme",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.4",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/runtime": "^7.16.3",
+    "autoprefixer": "^10.4.0",
+    "babel-loader": "^8.2.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.5.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
+    "node-sass": "^7.0.0",
+    "postcss-loader": "^6.2.1",
+    "sass-loader": "^12.4.0",
+    "style-loader": "^3.3.1",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.6.0"
+  },
+  "dependencies": {
+    "ami.js": "^0.33.0",
+    "glob": "^7.2.0",
+    "jquery": "^3.6.0",
+    "jsdoc": "^3.6.7",
+    "lil-gui": "^0.16.0",
+    "three": "0.119.0"
+  },
+  "directories": {
+    "doc": "docs"
+  }
+}
