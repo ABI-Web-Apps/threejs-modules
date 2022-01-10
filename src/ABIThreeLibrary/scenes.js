@@ -15,7 +15,7 @@ import { TrackballControls } from "three/examples/jsm/controls/TrackballControls
  * allScenes.animate();
  */
 
-export default class Scenes {
+class Scenes {
   constructor(container, numberOfScene, cameraPosition) {
     /**
      * How many scenes the user want to create.
@@ -240,3 +240,5 @@ export default class Scenes {
     window.requestAnimationFrame(this.animate);
   };
 }
+
+export default Scenes;

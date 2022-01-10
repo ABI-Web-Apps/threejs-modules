@@ -13,7 +13,7 @@ import * as THREE from "three";
  * gui.addColor(new ABIThree.ColorGUIHelper(scene1.scene, "background"), "value").name("background_color");
  *
  */
-export class ColorGUIHelper {
+class ColorGUIHelper {
   constructor(object, prop) {
     /**
      * The object that the user want to control in GUI
@@ -26,16 +26,9 @@ export class ColorGUIHelper {
      */
     this.prop = prop;
   }
-
-  /**
-   * Get current object color
-   */
   get value() {
     return `#${this.object[this.prop].getHexString()}`;
   }
-  /**
-   * Set current object color
-   */
   set value(hexString) {
     this.object[this.prop] = new THREE.Color(hexString);
   }
@@ -52,7 +45,7 @@ export class ColorGUIHelper {
                    .name("x");
  *
  */
-export class CameraHelper {
+class CameraHelper {
   constructor(object, prop) {
     /**
      * The object that the user want to control in GUI
@@ -72,3 +65,5 @@ export class CameraHelper {
     this.object[this.prop] = v;
   }
 }
+
+export { ColorGUIHelper, CameraHelper };

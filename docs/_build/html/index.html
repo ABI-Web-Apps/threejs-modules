@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to ABIThree Documentation’s documentation! &mdash; ABIThree Documentation 0.0.1 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> ABIThree Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to ABIThree Documentation’s documentation!</a></li>
+<li><a class="reference internal" href="#guide">Guide</a><ul>
+<li><a class="reference internal" href="#class">Class</a></li>
+<li><a class="reference internal" href="#loadmodule-functions">LoadModule Functions</a></li>
+<li><a class="reference internal" href="#helper">Helper</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">ABIThree Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>Welcome to ABIThree Documentation’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="welcome-to-abithree-documentation-s-documentation">
+<h1>Welcome to ABIThree Documentation’s documentation!<a class="headerlink" href="#welcome-to-abithree-documentation-s-documentation" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="guide">
+<h1>Guide<a class="headerlink" href="#guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class">
+<h2>Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
+<dl class="js class">
+<dt id="Scenes">
+<em class="property">class </em><code class="sig-name descname">Scenes</code><span class="sig-paren">(</span><em class="sig-param">constructor, args[container, numberOfScene, cameraPosition]</em><span class="sig-paren">)</span><a class="headerlink" href="#Scenes" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;Base class for making multiple scenes, it includes webGLRender, camera information, three.js controls.
+The default number of scene is one, and the default camera position is { x: 0, y: 0, z: 500 }.&lt;/p&gt;</p>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">allScenes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Scenes</span><span class="p">(</span><span class="nx">HTMLElement</span><span class="p">,</span> <span class="mf">4</span><span class="p">,</span> <span class="p">{</span><span class="mf">0</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="mf">1000</span><span class="p">});</span>
+<span class="nx">allScenes</span><span class="p">.</span><span class="nx">animate</span><span class="p">();</span>
+</pre></div>
+</div>
+<dl class="js attribute">
+<dt id="Scenes.animate">
+<code class="sig-prename descclassname">Scenes.</code><code class="sig-name descname">animate</code><a class="headerlink" href="#Scenes.animate" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;This function is for create animation and render the canvas.&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="Scenes.cameraPosition">
+<code class="sig-prename descclassname">Scenes.</code><code class="sig-name descname">cameraPosition</code><a class="headerlink" href="#Scenes.cameraPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> object</p>
+<p>&lt;p&gt;The camera postion, it is a object and the format is {x:number, y:number, z:number}&lt;/p&gt;</p>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">z</span><span class="o">:</span> <span class="mf">1000</span> <span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="Scenes.cameras">
+<code class="sig-prename descclassname">Scenes.</code><code class="sig-name descname">cameras</code><a class="headerlink" href="#Scenes.cameras" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> Array</p>
+<p>&lt;p&gt;It stores all camera information.&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="Scenes.container">
+<code class="sig-prename descclassname">Scenes.</code><code class="sig-name descname">container</code><a class="headerlink" href="#Scenes.container" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> HTMLElement</p>
+<p>&lt;p&gt;The main container for all scenes&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="Scenes.elems">
+<code class="sig-prename descclassname">Scenes.</code><code class="sig-name descname">elems</code><a class="headerlink" href="#Scenes.elems" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> Array</p>
+<p>&lt;p&gt;It stores all scenes’ parent domElements.&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="Scenes.numberOfScene">
+<code class="sig-prename descclassname">Scenes.</code><code class="sig-name descname">numberOfScene</code><a class="headerlink" href="#Scenes.numberOfScene" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> number</p>
+<p>&lt;p&gt;How many scenes the user want to create.&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="Scenes.renderSceneInfo">
+<code class="sig-prename descclassname">Scenes.</code><code class="sig-name descname">renderSceneInfo</code><a class="headerlink" href="#Scenes.renderSceneInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;This function is for render all scenes on canvas.&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="Scenes.resizeRendererToDisplaySize">
+<code class="sig-prename descclassname">Scenes.</code><code class="sig-name descname">resizeRendererToDisplaySize</code><a class="headerlink" href="#Scenes.resizeRendererToDisplaySize" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;This method causes the layout of the canvas to change responsively with the user’s window.&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="Scenes.sceneInfos">
+<code class="sig-prename descclassname">Scenes.</code><code class="sig-name descname">sceneInfos</code><a class="headerlink" href="#Scenes.sceneInfos" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;It stores all scenes’ information. Each scene’s info includes scene’s ID, scene,camera, domElement, controls, GUI.&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="Scenes.scenes">
+<code class="sig-prename descclassname">Scenes.</code><code class="sig-name descname">scenes</code><a class="headerlink" href="#Scenes.scenes" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> Array</p>
+<p>&lt;p&gt;It stores all scenes.&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Scenes.getScene">
+<code class="sig-prename descclassname">Scenes.</code><code class="sig-name descname">getScene</code><span class="sig-paren">(</span><em class="sig-param">id=0</em><span class="sig-paren">)</span><a class="headerlink" href="#Scenes.getScene" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;Get the scene infomation with the corresponding id by entering the  parameter ID.&lt;/p&gt;</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>Number</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Scenes</strong> – &lt;ul&gt; &lt;li&gt;If found the id of the scence&lt;/li&gt; &lt;/ul&gt;</p>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">getScene</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">sceneTwo</span> <span class="o">=</span> <span class="nx">getScene</span><span class="p">(</span><span class="mf">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Scenes.init">
+<code class="sig-prename descclassname">Scenes.</code><code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Scenes.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;The initial function.
+It will create a WebGLRenderer, and depends on the number of scenes to create each scene and it’s parent domElement.
+And it also can automatically create gui for each scene.
+All the informations will be stored in the sceneInfo object, such as:  scene,camera, domElement, controls, GUI.&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Scenes.makeScene">
+<code class="sig-prename descclassname">Scenes.</code><code class="sig-name descname">makeScene</code><span class="sig-paren">(</span><em class="sig-param">elem</em>, <em class="sig-param">cameraPosition</em><span class="sig-paren">)</span><a class="headerlink" href="#Scenes.makeScene" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;This functions is for init function to create multiple scenes.&lt;/p&gt;</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>elem</strong> (<em>HTMLElement</em>) – &lt;p&gt;the scene parent domElement.&lt;/p&gt;</p></li>
+<li><p><strong>cameraPosition</strong> (<em>object</em>) – &lt;p&gt;the cameraPostion&lt;/p&gt;</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>object</strong> – &lt;ul&gt; &lt;li&gt;{scene, camera, controls}&lt;/li&gt; &lt;/ul&gt;</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="js class">
+<dt id="ImageLoader">
+<em class="property">class </em><code class="sig-name descname">ImageLoader</code><span class="sig-paren">(</span><em class="sig-param">constructor, args[label,dicom_file_paths,scene,camera,container,gui,callbackFunction]</em><span class="sig-paren">)</span><a class="headerlink" href="#ImageLoader" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;This class is for loading dicom images with using ami.js.&lt;/p&gt;</p>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">container</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#container_root&quot;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">allScenes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ABIThree</span><span class="p">.</span><span class="nx">Scenes</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="mf">3</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">scene3</span> <span class="o">=</span> <span class="nx">allScenes</span><span class="p">.</span><span class="nx">getScene</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">imageLoader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ABIThree</span><span class="p">.</span><span class="nx">ImageLoader</span><span class="p">(</span>
+        <span class="s2">&quot;Image&quot;</span><span class="p">,</span>
+        <span class="nx">dicom_file_paths</span><span class="p">,</span>
+        <span class="nx">scene3</span><span class="p">.</span><span class="nx">scene</span><span class="p">,</span>
+        <span class="nx">scene3</span><span class="p">.</span><span class="nx">camera</span><span class="p">,</span>
+        <span class="nx">scene3</span><span class="p">.</span><span class="nx">elem</span><span class="p">,</span>
+        <span class="nx">gui</span><span class="p">,</span>
+        <span class="nx">callback</span><span class="p">,</span>
+      <span class="p">);</span>
+<span class="nx">imageLoader</span><span class="p">.</span><span class="nx">viewImage</span><span class="p">();</span>
+</pre></div>
+</div>
+<dl class="js attribute">
+<dt id="ImageLoader.callbackFunction">
+<code class="sig-prename descclassname">ImageLoader.</code><code class="sig-name descname">callbackFunction</code><a class="headerlink" href="#ImageLoader.callbackFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> function</p>
+<p>&lt;p&gt;Callback function&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="ImageLoader.camera">
+<code class="sig-prename descclassname">ImageLoader.</code><code class="sig-name descname">camera</code><a class="headerlink" href="#ImageLoader.camera" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> object</p>
+<p>&lt;p&gt;Current scene camera&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="ImageLoader.container">
+<code class="sig-prename descclassname">ImageLoader.</code><code class="sig-name descname">container</code><a class="headerlink" href="#ImageLoader.container" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> HTMLElement</p>
+<p>&lt;p&gt;Current domElemet&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="ImageLoader.gui">
+<code class="sig-prename descclassname">ImageLoader.</code><code class="sig-name descname">gui</code><a class="headerlink" href="#ImageLoader.gui" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> object</p>
+<p>&lt;p&gt;Current domElemet gui&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="ImageLoader.label">
+<code class="sig-prename descclassname">ImageLoader.</code><code class="sig-name descname">label</code><a class="headerlink" href="#ImageLoader.label" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> string</p>
+<p>&lt;p&gt;the image label&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="ImageLoader.path">
+<code class="sig-prename descclassname">ImageLoader.</code><code class="sig-name descname">path</code><a class="headerlink" href="#ImageLoader.path" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> Array.&lt;string&gt;</p>
+<p>&lt;p&gt;The dicom image paths&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="ImageLoader.scene">
+<code class="sig-prename descclassname">ImageLoader.</code><code class="sig-name descname">scene</code><a class="headerlink" href="#ImageLoader.scene" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> object</p>
+<p>&lt;p&gt;Current domElemet scene&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="ImageLoader.addGUI">
+<code class="sig-prename descclassname">ImageLoader.</code><code class="sig-name descname">addGUI</code><span class="sig-paren">(</span><em class="sig-param">stackHelper</em><span class="sig-paren">)</span><a class="headerlink" href="#ImageLoader.addGUI" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;add dicom image gui&lt;/p&gt;</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stackHelper</strong> (<em>object</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="ImageLoader.imageLoader">
+<code class="sig-prename descclassname">ImageLoader.</code><code class="sig-name descname">imageLoader</code><span class="sig-paren">(</span><em class="sig-param">paths</em><span class="sig-paren">)</span><a class="headerlink" href="#ImageLoader.imageLoader" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;loading dicom images by using ami.js&lt;/p&gt;</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paths</strong> (<em>Array.&lt;string&gt;</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="ImageLoader.setRenderFunction">
+<code class="sig-prename descclassname">ImageLoader.</code><code class="sig-name descname">setRenderFunction</code><span class="sig-paren">(</span><em class="sig-param">render</em><span class="sig-paren">)</span><a class="headerlink" href="#ImageLoader.setRenderFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;set current render&lt;/p&gt;</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>render</strong> (<em>object</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="ImageLoader.viewImage">
+<code class="sig-prename descclassname">ImageLoader.</code><code class="sig-name descname">viewImage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ImageLoader.viewImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;after load dicom image, then call this function to display.&lt;/p&gt;</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="loadmodule-functions">
+<h2>LoadModule Functions<a class="headerlink" href="#loadmodule-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="js function">
+<dt id="loadObjFile">
+<code class="sig-name descname">loadObjFile</code><span class="sig-paren">(</span><em class="sig-param">url</em>, <em class="sig-param">scene</em>, <em class="sig-param">camera</em><span class="optional">[</span>, <em class="sig-param">material=null</em>, <em class="sig-param">progressBar=null</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#loadObjFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;This function is for load .obj file&lt;/p&gt;</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> (<em>string</em>) – &lt;p&gt;the .obj file url&lt;/p&gt;</p></li>
+<li><p><strong>scene</strong> (<em>object</em>) – &lt;p&gt;the current domElement’s scene&lt;/p&gt;</p></li>
+<li><p><strong>camera</strong> (<em>object</em>) – &lt;p&gt;the current scene’s camera&lt;/p&gt;</p></li>
+<li><p><strong>material</strong> (<em>object</em>) – &lt;p&gt;the material for .obj file (optional), the default material is THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true })&lt;/p&gt;</p></li>
+<li><p><strong>progressBar</strong> (<em>HTMLElement</em>) – &lt;p&gt;the progress html domelment bar for loading.(optional)&lt;/p&gt;</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">container</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;container_root&quot;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">progressBar</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;progressBar&quot;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">allScenes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ABIThree</span><span class="p">.</span><span class="nx">Scenes</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">allScenes</span><span class="p">.</span><span class="nx">getScene</span><span class="p">();</span>
+<span class="nx">ABIThree</span><span class="p">.</span><span class="nx">loadObjFile</span><span class="p">(</span><span class="nx">monkey_g</span><span class="p">,</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">progressBar</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="loadMTLFile">
+<code class="sig-name descname">loadMTLFile</code><span class="sig-paren">(</span><em class="sig-param">url_mtl</em>, <em class="sig-param">url_obj</em>, <em class="sig-param">scene</em>, <em class="sig-param">camera</em><span class="optional">[</span>, <em class="sig-param">progressBar=null</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#loadMTLFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;This function is for loading .mtl module.
+.mtl module is .obj file with material&lt;/p&gt;</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url_mtl</strong> (<em>string</em>) – &lt;p&gt;.mtl file url&lt;/p&gt;</p></li>
+<li><p><strong>url_obj</strong> (<em>string</em>) – &lt;p&gt;.obj file url&lt;/p&gt;</p></li>
+<li><p><strong>scene</strong> (<em>object</em>) – &lt;p&gt;the current domElement’s scene&lt;/p&gt;</p></li>
+<li><p><strong>camera</strong> (<em>object</em>) – &lt;p&gt;the current scene’s camera&lt;/p&gt;</p></li>
+<li><p><strong>progressBar</strong> (<em>object</em>) – &lt;p&gt;the progress html domelment bar for loading.(optional)&lt;/p&gt;</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">container</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;container_root&quot;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">progressBar</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;progressBar&quot;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">allScenes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ABIThree</span><span class="p">.</span><span class="nx">Scenes</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">scene1</span> <span class="o">=</span> <span class="nx">allScenes</span><span class="p">.</span><span class="nx">getScene</span><span class="p">();</span>
+<span class="nx">ABIThree</span><span class="p">.</span><span class="nx">loadMTLFile</span><span class="p">(</span>
+    <span class="nx">monkey_m</span><span class="p">,</span>
+    <span class="nx">monkey_g</span><span class="p">,</span>
+    <span class="nx">scene1</span><span class="p">.</span><span class="nx">scene</span><span class="p">,</span>
+    <span class="nx">scene1</span><span class="p">.</span><span class="nx">camera</span><span class="p">,</span>
+    <span class="nx">progressBar</span>
+  <span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="loadGLTFFile">
+<code class="sig-name descname">loadGLTFFile</code><span class="sig-paren">(</span><em class="sig-param">url</em>, <em class="sig-param">scene</em>, <em class="sig-param">camera</em><span class="optional">[</span>, <em class="sig-param">progressBar=null</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#loadGLTFFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;This function is for loading .gltf module&lt;/p&gt;</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> (<em>*</em>) – &lt;p&gt;.gltf file url&lt;/p&gt;</p></li>
+<li><p><strong>scene</strong> (<em>*</em>) – &lt;p&gt;the current domElement’s scene&lt;/p&gt;</p></li>
+<li><p><strong>camera</strong> (<em>*</em>) – &lt;p&gt;the current scene’s camera&lt;/p&gt;</p></li>
+<li><p><strong>progressBar</strong> (<em>*</em>) – &lt;p&gt;the progress html domelment bar for loading.(optional)&lt;/p&gt;</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">container</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;container_root&quot;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">progressBar</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;progressBar&quot;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">allScenes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ABIThree</span><span class="p">.</span><span class="nx">Scenes</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="mf">1</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">scene1</span> <span class="o">=</span> <span class="nx">allScenes</span><span class="p">.</span><span class="nx">getScene</span><span class="p">();</span>
+<span class="nx">ABIThree</span><span class="p">.</span><span class="nx">loadGLTFFile</span><span class="p">(</span><span class="nx">monkey</span><span class="p">,</span> <span class="nx">scene1</span><span class="p">.</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">scene1</span><span class="p">.</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">progressBar</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="helper">
+<h2>Helper<a class="headerlink" href="#helper" title="Permalink to this headline">¶</a></h2>
+<dl class="js class">
+<dt id="CameraHelper">
+<em class="property">class </em><code class="sig-name descname">CameraHelper</code><span class="sig-paren">(</span><em class="sig-param">constructor, args[object, prop]</em><span class="sig-paren">)</span><a class="headerlink" href="#CameraHelper" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;This helper is for setting camera position&lt;/p&gt;</p>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">allScenes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ABIThree</span><span class="p">.</span><span class="nx">Scenes</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">scene1</span> <span class="o">=</span> <span class="nx">allScenes</span><span class="p">.</span><span class="nx">getScene</span><span class="p">();</span>
+<span class="kr">const</span> <span class="nx">gui</span> <span class="o">=</span> <span class="nx">scene1</span><span class="p">.</span><span class="nx">gui</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">camerafolder</span> <span class="o">=</span> <span class="nx">gui</span><span class="p">.</span><span class="nx">addFolder</span><span class="p">(</span><span class="s2">&quot;camera&quot;</span><span class="p">);</span>
+    <span class="nx">camerafolder</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">ABIThree</span><span class="p">.</span><span class="nx">CameraHelper</span><span class="p">(</span><span class="nx">scene1</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">),</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
+                   <span class="p">.</span><span class="nx">name</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<dl class="js attribute">
+<dt id="CameraHelper.object">
+<code class="sig-prename descclassname">CameraHelper.</code><code class="sig-name descname">object</code><a class="headerlink" href="#CameraHelper.object" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> object</p>
+<p>&lt;p&gt;The object that the user want to control in GUI&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="CameraHelper.prop">
+<code class="sig-prename descclassname">CameraHelper.</code><code class="sig-name descname">prop</code><a class="headerlink" href="#CameraHelper.prop" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> string</p>
+<p>&lt;p&gt;The object’ attribute that the user want to set&lt;/p&gt;</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="js class">
+<dt id="ColorGUIHelper">
+<em class="property">class </em><code class="sig-name descname">ColorGUIHelper</code><span class="sig-paren">(</span><em class="sig-param">constructor, args[object, prop]</em><span class="sig-paren">)</span><a class="headerlink" href="#ColorGUIHelper" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;p&gt;This helper is for setting color on object&lt;/p&gt;</p>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">allScenes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ABIThree</span><span class="p">.</span><span class="nx">Scenes</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">scene1</span> <span class="o">=</span> <span class="nx">allScenes</span><span class="p">.</span><span class="nx">getScene</span><span class="p">();</span>
+<span class="kr">const</span> <span class="nx">gui</span> <span class="o">=</span> <span class="nx">scene1</span><span class="p">.</span><span class="nx">gui</span><span class="p">;</span>
+<span class="nx">gui</span><span class="p">.</span><span class="nx">addColor</span><span class="p">(</span><span class="k">new</span> <span class="nx">ABIThree</span><span class="p">.</span><span class="nx">ColorGUIHelper</span><span class="p">(</span><span class="nx">scene1</span><span class="p">.</span><span class="nx">scene</span><span class="p">,</span> <span class="s2">&quot;background&quot;</span><span class="p">),</span> <span class="s2">&quot;value&quot;</span><span class="p">).</span><span class="nx">name</span><span class="p">(</span><span class="s2">&quot;background_color&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<dl class="js attribute">
+<dt id="ColorGUIHelper.object">
+<code class="sig-prename descclassname">ColorGUIHelper.</code><code class="sig-name descname">object</code><a class="headerlink" href="#ColorGUIHelper.object" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> object</p>
+<p>&lt;p&gt;The object that the user want to control in GUI&lt;/p&gt;</p>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="ColorGUIHelper.prop">
+<code class="sig-prename descclassname">ColorGUIHelper.</code><code class="sig-name descname">prop</code><a class="headerlink" href="#ColorGUIHelper.prop" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>type:</strong> string</p>
+<p>&lt;p&gt;The object’ attribute that the user want to set&lt;/p&gt;</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Auckland Bioengineering Institute.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

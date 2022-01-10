@@ -386,7 +386,7 @@ function linktoExternal(longName, name) {
  */
 function buildNav(members) {
   let globalNav;
-  let nav = '<h2><a href="index.html">ABITHREE Document</a></a></h2>';
+  let nav = '<h2><a href="index.html">ABITHREE Documentation</a></a></h2>';
   const seen = {};
   const seenTutorials = {};
 
@@ -661,7 +661,7 @@ exports.publish = (taffyData, opts, tutorials) => {
   packages = find({ kind: "package" });
 
   generate(
-    "ABITHREE Document",
+    "ABITHREE Documentation",
     packages
       .concat([
         {
