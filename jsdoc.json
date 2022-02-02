@@ -1,6 +1,6 @@
 {
   "source": {
-    "include": ["src"],
+    "include": ["src", "README.md"],
     "includePattern": ".js$",
     "excludePattern": "(node_modules/|docs|src/examples/)"
   },
@@ -12,6 +12,6 @@
   "opts": {
     "recurse": true,
     "destination": "./docs/",
-    "template": "./docs/custom-template"
+    "template": "node_modules/better-docs"
   }
 }
