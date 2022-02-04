@@ -20,16 +20,7 @@ const gui = scene1.gui;
 
 const screenPosCallback = (pos) => {
   div.innerHTML = "";
-  pos.forEach((mesh) => {
-    div.innerHTML +=
-      "G circle pos->: {  x:  " +
-      Math.round(mesh.position.x) +
-      "   y:   " +
-      Math.round(mesh.position.y) +
-      "   z:   " +
-      Math.round(mesh.position.z) +
-      `  }<br />`;
-  });
+  div.innerHTML = "Distance: ";
 };
 
 let imageLoader = new ABIThree.ImageLoader(
