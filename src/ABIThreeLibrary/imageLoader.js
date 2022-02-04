@@ -181,14 +181,22 @@ class ImageLoader {
   }
 
   removeDot() {
-    console.log(this.sceneInfo.scene);
     !!this.skin && this.sceneInfo.scene.remove(this.skin);
     !!this.ribcage && this.sceneInfo.scene.remove(this.ribcage);
     !!this.nipple && this.sceneInfo.scene.remove(this.nipple);
     this.skin = null;
     this.ribcage = null;
     this.nipple = null;
-    console.log(this.sceneInfo.scene);
+  }
+
+  calcDistance(x0, x1) {
+    console.log(x0, x1);
+    let dis = 0;
+    dis += Math.pow(x0.x - x1.x, 2);
+    dis += Math.pow(x0.y - x1.y, 2);
+    dis += Math.pow(x0.z - x1.z, 2);
+
+    return Math.floor(Math.sqrt(dis));
   }
 
   afterLoad = (stackHelper) => {
@@ -266,20 +274,32 @@ class ImageLoader {
         const interects = raycaster.intersectObject(
           this.stackHelper.slice.mesh
         );
-        const worldPos = interects[0].point;
-        console.log(this.stackHelper.slice);
+        if (interects.length > 0) {
+          const worldPos = interects[0].point;
 
-        // const c = createCircle(8, "rgb(26, 139, 252)");
-        // this.sceneInfo.scene.add(c);
-        const circle = createRingCircle("#47FF63");
-        circle.position.set(worldPos.x, worldPos.y, worldPos.z);
-        this.circles.push(circle);
-        this.sceneInfo.scene.add(circle);
-        if (
-          !!this.screenPosCallbackFunction &&
-          typeof this.screenPosCallbackFunction === "function"
-        ) {
-          this.screenPosCallbackFunction.call(this, this.circles);
+          const circle = createRingCircle("#47FF63");
+          circle.position.set(worldPos.x, worldPos.y, worldPos.z);
+          this.circles.push(circle);
+          this.sceneInfo.scene.add(circle);
+          if (
+            !!this.screenPosCallbackFunction &&
+            typeof this.screenPosCallbackFunction === "function"
+          ) {
+            const distances = {};
+            const dis_skin = this.skin
+              ? this.calcDistance(circle.position, this.skin.position)
+              : 0;
+            const dis_ribcage = this.ribcage
+              ? this.calcDistance(circle.position, this.ribcage.position)
+              : 0;
+            const dis_nipple = this.nipple
+              ? this.calcDistance(circle.position, this.nipple.position)
+              : 0;
+            distances["skin"] = dis_skin;
+            distances["ribcage"] = dis_ribcage;
+            distances["nipple"] = dis_nipple;
+            this.screenPosCallbackFunction.call(this, distances);
+          }
         }
       }
     };
