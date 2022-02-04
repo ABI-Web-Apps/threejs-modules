@@ -16,11 +16,26 @@ const scene1 = Scene.getScene(0);
 const div = ABIThree.createPanel(280, 200, "rgba(164,241,255,0.3)");
 scene1.elem.appendChild(div);
 
+const skin = document.createElement("div");
+skin.style.color = "rgb(243, 242, 135)";
+skin.innerHTML = "Skin     :" + 0 + "    mm";
+const ribcage = document.createElement("div");
+ribcage.style.color = "rgb(26, 139, 252)";
+ribcage.innerHTML = "Ribcage     :" + 0 + "    mm";
+const nipple = document.createElement("div");
+nipple.style.color = "rgb(245, 103, 135)";
+nipple.innerHTML = "Nipple     :" + 0 + "    mm";
+
+div.appendChild(skin);
+div.appendChild(ribcage);
+div.appendChild(nipple);
+
 const gui = scene1.gui;
 
 const screenPosCallback = (pos) => {
-  div.innerHTML = "";
-  div.innerHTML = "Distance: ";
+  skin.innerHTML = "Skin     :" + pos.skin + "    mm";
+  ribcage.innerHTML = "Ribcage     :" + pos.ribcage + "    mm";
+  nipple.innerHTML = "Nipple     :" + pos.nipple + "    mm";
 };
 
 let imageLoader = new ABIThree.ImageLoader(
