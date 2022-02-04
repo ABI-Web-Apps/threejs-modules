@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> loadModules.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-GUIHelper.html">GUIHelper</a></li><li><a href="module-ImageLoader.html">ImageLoader</a></li><li><a href="module-LoadModules.html">LoadModules</a></li><li><a href="module-Scenes.html">Scenes</a></li></ul><h3>Classes</h3><ul><li><a href="module-GUIHelper-CameraHelper.html">CameraHelper</a></li><li><a href="module-GUIHelper-ColorGUIHelper.html">ColorGUIHelper</a></li><li><a href="module-ImageLoader-ImageLoader.html">ImageLoader</a></li><li><a href="module-Scenes-Scenes.html">Scenes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#convert3DPostoScreenPos">convert3DPostoScreenPos</a></li><li><a href="global.html#convertScreenPosto3DPos">convertScreenPosto3DPos</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>loadModules.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import * as THREE from "three";
+// import * as three from "three-v79"
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
+import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+
+/**
+ * @module LoadModules
+ *
+ */
+
+/**
+ *
+ * inner function just for deal with loading
+ */
+function loadingBar(xhr, progressBar) {
+  if (xhr.total !== 0) {
+    const percentComplete = (xhr.loaded / xhr.total) * 100;
+    progressBar.value = percentComplete;
+    progressBar.style.display = "none";
+  } else {
+    progressBar.style.display = "none";
+  }
+}
+
+/**
+ * This function will return a default material for obj module
+ * @returns {object} - threejs material
+ */
+function getMaterial() {
+  return new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+}
+
+/**
+ * This function is for load .obj file
+ * @param {string} url - the .obj file url
+ * @param {object} scene - the current domElement's scene
+ * @param {object} camera - the current scene's camera
+ * @param {object} [material] - the material for .obj file (optional), the default material is THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true })
+ * @param {HTMLElement} [progressBar] - the progress html domelment bar for loading.(optional)
+ * @example
+ * const container = document.getElementById("container_root");
+ * const progressBar = document.getElementById("progressBar");
+ * const allScenes = new ABIThree.Scenes(container);
+ * const scene = allScenes.getScene();
+ * ABIThree.loadObjFile(monkey_g, scene.scene, scene.camera, progressBar);
+ *
+ *
+ */
+function loadObjFile(url, scene, camera, material = null, progressBar = null) {
+  const objLoader = new OBJLoader();
+  !!material &amp; objLoader.setMaterials(material);
+
+  objLoader.load(
+    url,
+    (object) => {
+      if (!!material === false) {
+        object.traverse(function (child) {
+          if (child.isMesh) {
+            child.material = getMaterial();
+          }
+        });
+      }
+      camera.position.z = object.position.z + 10;
+      scene.add(object);
+    },
+    (xhr) => {
+      if (progressBar) {
+        loadingBar(xhr, progressBar);
+      }
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+}
+
+/**
+ * This function is for loading .mtl module. 
+ * .mtl module is .obj file with material
+ * @param {string} url_mtl - .mtl file url
+ * @param {string} url_obj - .obj file url
+ * @param {object} scene - the current domElement's scene
+ * @param {object} camera  - the current scene's camera
+ * @param {object} [progressBar] - the progress html domelment bar for loading.(optional)
+ * @example
+ * const container = document.getElementById("container_root");
+ * const progressBar = document.getElementById("progressBar");
+ * const allScenes = new ABIThree.Scenes(container);
+ * const scene1 = allScenes.getScene();
+ * ABIThree.loadMTLFile(
+    monkey_m,
+    monkey_g,
+    scene1.scene,
+    scene1.camera,
+    progressBar
+  );
+ *
+ *
+ */
+function loadMTLFile(url_mtl, url_obj, scene, camera, progressBar = null) {
+  const mtlLoader = new MTLLoader();
+
+  mtlLoader.load(url_mtl, (material) => {
+    material.preload();
+    loadObjFile(url_obj, scene, camera, material, progressBar);
+  });
+}
+
+/**
+ * This function is for loading .gltf module
+ * @param {*} url - .gltf file url
+ * @param {*} scene - the current domElement's scene
+ * @param {*} camera - the current scene's camera
+ * @param {*} [progressBar] - the progress html domelment bar for loading.(optional)
+ *
+ * @example
+ * const container = document.getElementById("container_root");
+ * const progressBar = document.getElementById("progressBar");
+ * const allScenes = new ABIThree.Scenes(container, 1);
+ * const scene1 = allScenes.getScene();
+ * ABIThree.loadGLTFFile(monkey, scene1.scene, scene1.camera, progressBar);
+ *
+ *
+ */
+function loadGLTFFile(url, scene, camera, callback, progressBar = null) {
+  const gltfLoader = new GLTFLoader();
+
+  gltfLoader.load(
+    url,
+    (gltf) => {
+      camera.position.z = gltf.scene.position.z + 10;
+      scene.add(gltf.scene);
+      !!(typeof callback === "function") &amp;&amp; callback.call(this, gltf.scenes);
+    },
+    (xhr) => {
+      if (progressBar) {
+        loadingBar(xhr, progressBar);
+      }
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+}
+
+/**
+ *
+ * @param {number} r - Radius
+ * @param {string} color - e.g., 0xffffff
+ * @returns {object} - A Circle mesh
+ */
+function createCircle(r, color) {
+  const geometry = new THREE.CircleGeometry(r * 1.6, 30);
+  const material = new THREE.MeshBasicMaterial({
+    color: color,
+    transparent: true,
+    side: THREE.DoubleSide,
+  });
+  return new THREE.Mesh(geometry, material);
+}
+
+/**
+ *
+ * @param {string} color  - e.g., 0xffffff
+ * @returns {object} - A ring circle mesh
+ */
+function createRingCircle(color) {
+  const geometry = new THREE.RingGeometry(10, 9, 30);
+  const material = new THREE.MeshBasicMaterial({
+    color: color,
+    transparent: true,
+    side: THREE.DoubleSide,
+  });
+  return new THREE.Mesh(geometry, material);
+}
+
+/**
+ *
+ * @param {number} [width] - Default value 250px
+ * @param {number} [height] - Default value 180px
+ * @param {string} [backgroundColor] - Default "rgba(255,255,255,0.1)"
+ * @returns {HTMLElement} - A div for right panel
+ */
+function createPanel(width, height, backgroundColor) {
+  const div = document.createElement("div");
+
+  div.style.width = typeof width === "number" ? width + "px" : "250px";
+  div.style.minHeight = typeof height === "number" ? height + "px" : "180px";
+  div.style.backgroundColor =
+    typeof backgroundColor === "string"
+      ? backgroundColor
+      : "rgba(255,255,255,0.1)";
+  div.style.padding = "5px";
+  div.style.margin = "2px";
+  div.style.color = "#fff";
+  div.style.position = "absolute";
+  div.style.right = "0px";
+  div.style.top = "0px";
+  div.style.borderRadius = "5px";
+  return div;
+}
+
+export {
+  loadObjFile,
+  loadMTLFile,
+  loadGLTFFile,
+  createCircle,
+  createRingCircle,
+  createPanel,
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.10</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>
