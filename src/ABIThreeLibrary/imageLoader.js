@@ -204,18 +204,29 @@ class ImageLoader {
 
     const clickElem = (elem) => {
       if (elem.path[0].className === "abithree_scene_div") {
-        const vec2 = new THREE.Vector2(elem.offsetX, elem.offsetY);
+        const mouseClick = new THREE.Vector2(elem.offsetX, elem.offsetY);
+        const std_x = (mouseClick.x / this.sceneInfo.elem.clientWidth) * 2 - 1;
+        const std_y =
+          -(mouseClick.y / this.sceneInfo.elem.clientHeight) * 2 + 1;
 
-        const worldPos = convertScreenPosto3DPos(this.sceneInfo, vec2);
-        const circle = createRingCircle("#47FF63");
-        circle.position.set(worldPos.x, worldPos.y, worldPos.z);
-        this.circles.push(circle);
-        this.sceneInfo.scene.add(circle);
-        if (
-          !!this.screenPosCallbackFunction &&
-          typeof this.screenPosCallbackFunction === "function"
-        ) {
-          this.screenPosCallbackFunction.call(this, this.circles);
+        const raycaster = new THREE.Raycaster();
+        raycaster.setFromCamera(new THREE.Vector2(std_x, std_y), this.camera);
+        const interects = raycaster.intersectObject(
+          this.stackHelper.slice.mesh
+        );
+        if (interects.length > 0) {
+          const worldPos = interects[0].point;
+
+          const circle = createRingCircle("#47FF63");
+          circle.position.set(worldPos.x, worldPos.y, worldPos.z);
+          this.circles.push(circle);
+          this.sceneInfo.scene.add(circle);
+          if (
+            !!this.screenPosCallbackFunction &&
+            typeof this.screenPosCallbackFunction === "function"
+          ) {
+            this.screenPosCallbackFunction.call(this, this.circles);
+          }
         }
       }
     };
