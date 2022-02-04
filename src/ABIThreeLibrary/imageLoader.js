@@ -80,6 +80,7 @@ class ImageLoader {
     this.ribcage = null;
     this.nipple = null;
     this.docs = null;
+    this.lastCircle = null;
     // this.group = null;
   }
 
@@ -199,6 +200,10 @@ class ImageLoader {
     return Math.floor(Math.sqrt(dis));
   }
 
+  removeClickGreenCircle() {
+    !!this.lastCircle && this.sceneInfo.scene.remove(this.lastCircle);
+  }
+
   afterLoad = (stackHelper) => {
     stackHelper.position.set(
       this.stackPostion.x,
@@ -277,9 +282,11 @@ class ImageLoader {
         if (interects.length > 0) {
           const worldPos = interects[0].point;
 
+          this.removeClickGreenCircle();
           const circle = createRingCircle("#47FF63");
-          circle.position.set(worldPos.x, worldPos.y, worldPos.z);
+          circle.position.set(worldPos.x, worldPos.y, worldPos.z + 0.5);
           this.circles.push(circle);
+          this.lastCircle = circle;
           this.sceneInfo.scene.add(circle);
           if (
             !!this.screenPosCallbackFunction &&
