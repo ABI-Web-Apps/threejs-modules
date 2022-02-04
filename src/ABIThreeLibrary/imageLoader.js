@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { stackHelperFactory, VolumeLoader } from "ami.js";
-import { createRingCircle } from "./loadModules";
+import { createRingCircle, createCircle } from "./loadModules";
 import { convertScreenPosto3DPos } from "./utils";
 
 /**
@@ -76,6 +76,10 @@ class ImageLoader {
     this.newIndex = -1;
     this.image = null;
     this.render = null;
+    this.skin = null;
+    this.ribcage = null;
+    this.nipple = null;
+    this.docs = null;
     // this.group = null;
   }
 
@@ -142,12 +146,49 @@ class ImageLoader {
    * after load dicom image, then call this function to display.
    *
    */
-  viewImage() {
+  viewImage(dots) {
     this.imageLoader(this.path).then(() => {
       this.addGUI(this.stackHelper);
       this.scene.add(this.stackHelper);
+
+      if (dots) {
+        this.docs = dots;
+        const dot = this.docs.find(
+          (dot) => dot.index === this.stackHelper.slice.index
+        );
+        if (dot) {
+          this.createDot(dot);
+        } else {
+          this.removeDot();
+        }
+      }
+
       return this.stackHelper;
     });
+  }
+
+  createDot(dot) {
+    this.skin = createCircle(8, dot.Skin.color);
+    this.skin.position.set(dot.Skin.x, dot.Skin.y, dot.Skin.z);
+    this.ribcage = createCircle(8, dot.Ribcage.color);
+    this.ribcage.position.set(dot.Ribcage.x, dot.Ribcage.y, dot.Ribcage.z);
+    this.nipple = createCircle(8, dot.Nipple.color);
+    this.nipple.position.set(dot.Nipple.x, dot.Nipple.y, dot.Nipple.z);
+
+    this.sceneInfo.scene.add(this.skin);
+    this.sceneInfo.scene.add(this.ribcage);
+    this.sceneInfo.scene.add(this.nipple);
+  }
+
+  removeDot() {
+    console.log(this.sceneInfo.scene);
+    !!this.skin && this.sceneInfo.scene.remove(this.skin);
+    !!this.ribcage && this.sceneInfo.scene.remove(this.ribcage);
+    !!this.nipple && this.sceneInfo.scene.remove(this.nipple);
+    this.skin = null;
+    this.ribcage = null;
+    this.nipple = null;
+    console.log(this.sceneInfo.scene);
   }
 
   afterLoad = (stackHelper) => {
@@ -182,7 +223,17 @@ class ImageLoader {
     stackFolder
       .add(stackHelper, "index", 0, stack.dimensionsIJK.z - 1)
       .step(1)
-      .name("ImageLayer");
+      .name("ImageLayer")
+      .onChange((v) => {
+        const dot = this.docs.find((dot) => dot.index === v);
+        if (dot) {
+          if (!this.skin) {
+            this.createDot(dot);
+          }
+        } else {
+          this.removeDot();
+        }
+      });
 
     stackFolder.open();
 
@@ -205,6 +256,7 @@ class ImageLoader {
     const clickElem = (elem) => {
       if (elem.path[0].className === "abithree_scene_div") {
         const mouseClick = new THREE.Vector2(elem.offsetX, elem.offsetY);
+        // const worldPos = convertScreenPosto3DPos(this.sceneInfo, mouseClick);
         const std_x = (mouseClick.x / this.sceneInfo.elem.clientWidth) * 2 - 1;
         const std_y =
           -(mouseClick.y / this.sceneInfo.elem.clientHeight) * 2 + 1;
@@ -214,19 +266,20 @@ class ImageLoader {
         const interects = raycaster.intersectObject(
           this.stackHelper.slice.mesh
         );
-        if (interects.length > 0) {
-          const worldPos = interects[0].point;
+        const worldPos = interects[0].point;
+        console.log(this.stackHelper.slice);
 
-          const circle = createRingCircle("#47FF63");
-          circle.position.set(worldPos.x, worldPos.y, worldPos.z);
-          this.circles.push(circle);
-          this.sceneInfo.scene.add(circle);
-          if (
-            !!this.screenPosCallbackFunction &&
-            typeof this.screenPosCallbackFunction === "function"
-          ) {
-            this.screenPosCallbackFunction.call(this, this.circles);
-          }
+        // const c = createCircle(8, "rgb(26, 139, 252)");
+        // this.sceneInfo.scene.add(c);
+        const circle = createRingCircle("#47FF63");
+        circle.position.set(worldPos.x, worldPos.y, worldPos.z);
+        this.circles.push(circle);
+        this.sceneInfo.scene.add(circle);
+        if (
+          !!this.screenPosCallbackFunction &&
+          typeof this.screenPosCallbackFunction === "function"
+        ) {
+          this.screenPosCallbackFunction.call(this, this.circles);
         }
       }
     };
