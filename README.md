@@ -21,7 +21,11 @@ Current functions:
 
 See: https://linkungao.github.io/threejs-modules-1/
 
-## How to see examples:
+## See examples here:
+
+See: https://copper3d-examples.herokuapp.com/
+
+## How to see examples locally:
 
 - cd Copper3D
 - npm install
