@@ -1,10 +1,11 @@
-import * as ABIThree from "../../ABIThreeLibrary/main";
+import * as ABIThree from "../../Copper3D/main";
 import data from "./dicom.json";
+import dots from "./dots.json";
 import monkey from "../assets/modules/monkey.glb";
 import "./mystyle.css";
 
 const container = document.querySelector("#container_root");
-const numberOfScene = 2;
+const numberOfScene = 1;
 const Scene = new ABIThree.Scenes(container, numberOfScene);
 let dicom_file_paths = [];
 for (let item of data) {
@@ -12,24 +13,38 @@ for (let item of data) {
 }
 
 const scene1 = Scene.getScene(0);
-const scene2 = Scene.getScene(1);
 
-const gui = scene2.gui;
-scene2.camera.position.set(0, 0, 500);
-scene2.camera.far = 1000;
+const div = ABIThree.createPanel(280, 200, "rgba(164,241,255,0.3)");
+scene1.elem.appendChild(div);
+const skin = document.createElement("div");
+skin.style.color = "rgb(243, 242, 135)";
+skin.innerHTML = "Skin     :" + 0 + "    mm";
+const ribcage = document.createElement("div");
+ribcage.style.color = "rgb(26, 139, 252)";
+ribcage.innerHTML = "Ribcage     :" + 0 + "    mm";
+const nipple = document.createElement("div");
+nipple.style.color = "rgb(245, 103, 135)";
+nipple.innerHTML = "Nipple     :" + 0 + "    mm";
+
+div.appendChild(skin);
+div.appendChild(ribcage);
+div.appendChild(nipple);
+const gui = scene1.gui;
 
 const screenPosCallback = (pos) => {
-  console.log(pos);
+  skin.innerHTML = "Skin     :" + pos.skin + "    mm";
+  ribcage.innerHTML = "Ribcage     :" + pos.ribcage + "    mm";
+  nipple.innerHTML = "Nipple     :" + pos.nipple + "    mm";
 };
 
 let imageLoader = new ABIThree.ImageLoader(
   "Image",
   dicom_file_paths,
-  scene2,
+  scene1,
   gui,
   screenPosCallback
 );
-imageLoader.viewImage();
+imageLoader.viewImage(dots);
 imageLoader.setImagePosition({ x: 0, y: 0, z: 0 }, (stackHelper) => {
   console.log("hello: ", stackHelper);
 });
@@ -55,8 +70,14 @@ gui.add({ cameraOpen: false }, "cameraOpen").onChange((v) => {
   }
 });
 
-ABIThree.loadGLTFFile(monkey, scene1.scene, scene1.camera);
+const getMesh = (mesh) => {
+  console.log(mesh);
+  mesh[0].scale.set(50, 50, 50);
+  mesh[0].position.set(-200, -50, 0);
+  scene1.camera.position.set(0, 0, 500);
+  scene1.camera.far = 1000;
+};
 
-const gui1 = scene1.gui;
+ABIThree.loadGLTFFile(monkey, scene1.scene, scene1.camera, getMesh);
 
 Scene.animate();

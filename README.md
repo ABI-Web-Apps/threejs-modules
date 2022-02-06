@@ -1,4 +1,4 @@
-# threejs-modules-1
+# Copper3D
 
 This library is base on three.js and ami.js.
 Current functions:
@@ -11,11 +11,21 @@ Current functions:
 - Interacting with MRI images
 - Draw circle on MRI images
 
+## How to use:
+
+    import * as Copper from 'copper3d';
+    const allScenes = new Copper.Scenes(HTMLElement, 4, {0, 0, 1000});
+    allScenes.animate();
+
+## API Tutorial:
+
+See: https://linkungao.github.io/threejs-modules-1/
+
 ## How to see examples:
 
-cd THREEJS-MODULES-1
-npm install
-npm run serve
+- cd Copper3D
+- npm install
+- npm run serve
 
 ### The operations for draw circle function
 

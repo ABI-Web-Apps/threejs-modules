@@ -50,8 +50,6 @@ const { entry, htmlWebpackPlugins } = setMpa();
 // console.log(entry);
 module.exports = {
   mode: "development",
-  // mode: "production",
-  // for build
   entry: entry,
   output: {
     path: path.join(__dirname, "build"),
@@ -59,9 +57,6 @@ module.exports = {
   },
   plugins: [new CleanWebpackPlugin()].concat(htmlWebpackPlugins),
   optimization: {
-    // 为了方便阅读理解打包后的代码，关闭代码压缩和模块合并
-    // minimize: false,
-    // concatenateModules: false,
     minimize: true,
     concatenateModules: true,
   },
@@ -70,28 +65,6 @@ module.exports = {
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
-
-  // for dev
-  // entry: {
-  //   example04: path.join(__dirname, "./src/example04/index.js"),
-  // },
-  // output: {
-  //   path: path.join(__dirname, "./dist"),
-  //   filename: "[name].ABI.js",
-  // },
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //     chunks: ["example04"],
-  //     template: "./src/example04/index.html",
-  //     // when the single file here must be index.html, if the file name is not index.html, the root will be public folder
-  //     filename: "index.html",
-  //     hash: true,
-  //     minify: {
-  //       removeComments: true,
-  //       collapseWhitespace: true,
-  //     },
-  //   }),
-  // ],
 
   module: {
     rules: [
@@ -136,10 +109,4 @@ module.exports = {
       },
     ],
   },
-  // devServer
-  // devServer: {
-  //   static: { directory: resolve(__dirname, "build") },
-  //   compress: true,
-  //   port: 3000,
-  // },
 };
