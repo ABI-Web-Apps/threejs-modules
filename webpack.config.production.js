@@ -13,11 +13,11 @@ module.exports = {
     maxAssetSize: 512000,
   },
 
-  entry: "./src/ABIThreeLibrary/main.js",
+  entry: "./src/Copper3D/main.js",
   output: {
     path: path.join(__dirname, "build"),
-    filename: "ABIThree.js",
-    library: "ABITHREE",
+    filename: "copper3d.js",
+    library: "Copper3D",
     libraryTarget: "umd",
   },
   module: {

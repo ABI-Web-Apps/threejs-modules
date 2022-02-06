@@ -1,4 +1,4 @@
-import * as ABIThree from "../../ABIThreeLibrary/main";
+import * as ABIThree from "../../Copper3D/main";
 import "../assets/css/style.css";
 import data from "./dicom.json";
 

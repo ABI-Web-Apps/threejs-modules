@@ -238,13 +238,15 @@ class ImageLoader {
       .step(1)
       .name("ImageLayer")
       .onChange((v) => {
-        const dot = this.docs.find((dot) => dot.index === v);
-        if (dot) {
-          if (!this.skin) {
-            this.createDot(dot);
+        if (this.docs) {
+          const dot = this.docs.find((dot) => dot.index === v);
+          if (dot) {
+            if (!this.skin) {
+              this.createDot(dot);
+            }
+          } else {
+            this.removeDot();
           }
-        } else {
-          this.removeDot();
         }
       });
 

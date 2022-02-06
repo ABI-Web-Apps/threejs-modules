@@ -1,13 +1,14 @@
 {
-  "name": "abithree-modules",
-  "version": "1.0.1",
-  "description": "## How to use:",
+  "name": "copper3d",
+  "version": "0.0.1",
+  "description": "A library of visual and interactive computer models of organ systems based on three.js and ami.js.",
   "main": "./src/ABIThreeLibrary/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
+    "start": "webpack serve --open",
     "serve": "webpack serve --open --host 127.0.0.1 --port 3000",
-    "build:abi": "webpack -c webpack.config.production.js",
+    "build:copper": "webpack -c webpack.config.production.js",
     "doc": "jsdoc -c jsdoc.json"
   },
   "repository": {

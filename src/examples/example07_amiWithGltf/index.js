@@ -1,6 +1,5 @@
-import * as ABIThree from "../../ABIThreeLibrary/main";
+import * as ABIThree from "../../Copper3D/main";
 import data from "./dicom.json";
-import dots from "./dots.json";
 import monkey from "../assets/modules/monkey.glb";
 import "./mystyle.css";
 
@@ -9,13 +8,14 @@ const numberOfScene = 1;
 const Scene = new ABIThree.Scenes(container, numberOfScene);
 let dicom_file_paths = [];
 for (let item of data) {
-  dicom_file_paths.push(require("../assets/images/dicom1/" + item));
+  dicom_file_paths.push(require("../assets/images/dicom2/" + item));
 }
 
 const scene1 = Scene.getScene(0);
 
 const div = ABIThree.createPanel(280, 200, "rgba(164,241,255,0.3)");
 scene1.elem.appendChild(div);
+
 const skin = document.createElement("div");
 skin.style.color = "rgb(243, 242, 135)";
 skin.innerHTML = "Skin     :" + 0 + "    mm";
@@ -29,6 +29,7 @@ nipple.innerHTML = "Nipple     :" + 0 + "    mm";
 div.appendChild(skin);
 div.appendChild(ribcage);
 div.appendChild(nipple);
+
 const gui = scene1.gui;
 
 const screenPosCallback = (pos) => {
@@ -44,7 +45,7 @@ let imageLoader = new ABIThree.ImageLoader(
   gui,
   screenPosCallback
 );
-imageLoader.viewImage(dots);
+imageLoader.viewImage();
 imageLoader.setImagePosition({ x: 0, y: 0, z: 0 }, (stackHelper) => {
   console.log("hello: ", stackHelper);
 });
@@ -73,7 +74,7 @@ gui.add({ cameraOpen: false }, "cameraOpen").onChange((v) => {
 const getMesh = (mesh) => {
   console.log(mesh);
   mesh[0].scale.set(50, 50, 50);
-  mesh[0].position.set(-200, -50, 0);
+  mesh[0].position.set(-100, -50, 0);
   scene1.camera.position.set(0, 0, 500);
   scene1.camera.far = 1000;
 };
