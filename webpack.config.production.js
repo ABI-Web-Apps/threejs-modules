@@ -26,11 +26,6 @@ module.exports = {
         test: /\.css$/i,
         use: ["style-loader", "css-loader", "postcss-loader"],
       },
-      { test: /\.less$/i, use: ["style-loader", "css-loader", "less-loader"] },
-      {
-        test: /\.scss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
-      },
       {
         test: /\.js$/i,
         use: "babel-loader",
@@ -42,24 +37,6 @@ module.exports = {
         options: {
           esModule: false,
         },
-      },
-      {
-        test: /\.(dcm)(\?.*)?$/,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              limit: 1024 * 4,
-              esModule: false,
-              fallback: {
-                loader: require.resolve("file-loader"),
-                options: {
-                  outputPath: "images",
-                },
-              },
-            },
-          },
-        ],
       },
     ],
   },
