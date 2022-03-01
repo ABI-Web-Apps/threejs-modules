@@ -58,7 +58,7 @@ An example for quickly build multiple scenes:
 ```
 
 In the end, you might see this screenshot in your browser:
-![how to use Multiple scenes](/doc-screenshorts/01_howtouse.jpg "Multiple scenes")
+![how to use Multiple scenes](/doc-screenshorts/01_howtouse.jpg "Create Multiple scenes")
 
 ## API Tutorial:
 
