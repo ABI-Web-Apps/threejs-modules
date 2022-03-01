@@ -3,7 +3,6 @@ const glob = require("glob");
 // add webpack plugin, in order to help run serve
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const { resolve } = require("path");
 
 const setMpa = () => {
   const entry = {}; //entry obj
@@ -29,12 +28,8 @@ const setMpa = () => {
         hash: true,
         inject: true,
         minify: {
-          html5: true,
-          collapseWhitespace: true,
-          preserveLineBreaks: false,
           minifyJS: true,
           minifyCSS: true,
-          removeComments: false,
         },
       })
     );
@@ -47,8 +42,8 @@ const setMpa = () => {
 };
 
 const { entry, htmlWebpackPlugins } = setMpa();
-// console.log(entry);
 module.exports = {
+  devtool: "eval-source-map", // for debug
   mode: "development",
   entry: entry,
   output: {
@@ -70,42 +65,27 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader", "postcss-loader"],
-      },
-      { test: /\.less$/i, use: ["style-loader", "css-loader", "less-loader"] },
-      {
-        test: /\.scss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: ["style-loader", "cache-loader", "css-loader", "postcss-loader"],
       },
       {
         test: /\.js$/i,
-        use: "babel-loader",
+        use: [
+          "cache-loader",
+          {
+            loader: "babel-loader?cacheDirectory=true",
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
         exclude: /node_modules/,
       },
       {
-        test: /\.(png|svg|jpe?g|bin|gif|glb|gltf|obj|mtl)$/,
+        test: /\.(png|svg|jpe?g|bin|gif|glb|gltf|obj|mtl|dcm)$/,
         loader: "file-loader",
         options: {
           esModule: false,
         },
-      },
-      {
-        test: /\.(dcm)(\?.*)?$/,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              limit: 1024 * 4,
-              esModule: false,
-              fallback: {
-                loader: require.resolve("file-loader"),
-                options: {
-                  outputPath: "images",
-                },
-              },
-            },
-          },
-        ],
       },
     ],
   },

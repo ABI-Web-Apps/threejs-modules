@@ -1,0 +1,1194 @@
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @license  MIT
+ */
+
+/*! ../../external/scripts/jpeg */
+
+/*! ../../external/scripts/jpx */
+
+/*! ../core/core.colors */
+
+/*! ../core/core.intersections */
+
+/*! ../core/core.utils */
+
+/*! ../core/core.validators */
+
+/*! ../decoders/decoders.rle */
+
+/*! ../geometries/geometries.slice */
+
+/*! ../helpers/helpers.border */
+
+/*! ../helpers/helpers.boundingbox */
+
+/*! ../helpers/helpers.material.mixin */
+
+/*! ../helpers/helpers.progressbar */
+
+/*! ../helpers/helpers.slice */
+
+/*! ../helpers/shaders.helpers.texture3d */
+
+/*! ../helpers/shaders.helpers.unpack */
+
+/*! ../math/Ray.js */
+
+/*! ../models/models.base */
+
+/*! ../models/models.frame */
+
+/*! ../models/models.series */
+
+/*! ../models/models.stack */
+
+/*! ../models/models.voxel */
+
+/*! ../node_modules/three/package.json */
+
+/*! ../package.json */
+
+/*! ../parsers/parsers.dicom */
+
+/*! ../parsers/parsers.mgh */
+
+/*! ../parsers/parsers.mhd */
+
+/*! ../parsers/parsers.nifti */
+
+/*! ../parsers/parsers.nrrd */
+
+/*! ../shaders.base */
+
+/*! ../shaders/shaders.contour.fragment */
+
+/*! ../shaders/shaders.contour.uniform */
+
+/*! ../shaders/shaders.contour.vertex */
+
+/*! ../shaders/shaders.data.fragment */
+
+/*! ../shaders/shaders.data.uniform */
+
+/*! ../shaders/shaders.data.vertex */
+
+/*! ../shaders/shaders.localizer.fragment */
+
+/*! ../shaders/shaders.localizer.uniform */
+
+/*! ../shaders/shaders.localizer.vertex */
+
+/*! ../shaders/shaders.vr.fragment */
+
+/*! ../shaders/shaders.vr.uniform */
+
+/*! ../shaders/shaders.vr.vertex */
+
+/*! ../utils/common */
+
+/*! ./../../buffer/index.js */
+
+/*! ./../../process/browser.js */
+
+/*! ./../process/browser.js */
+
+/*! ./../webpack/buildin/global.js */
+
+/*! ./Box3.js */
+
+/*! ./Math.js */
+
+/*! ./Matrix4.js */
+
+/*! ./Quaternion.js */
+
+/*! ./Sphere.js */
+
+/*! ./Vector3.js */
+
+/*! ./adler32 */
+
+/*! ./cameras.orthographic */
+
+/*! ./cameras/cameras */
+
+/*! ./common */
+
+/*! ./component-spec.js */
+
+/*! ./controls.orbit */
+
+/*! ./controls.trackball */
+
+/*! ./controls.trackballortho */
+
+/*! ./controls/controls */
+
+/*! ./core.colors */
+
+/*! ./core.intersections */
+
+/*! ./core.utils */
+
+/*! ./core.validators */
+
+/*! ./core/core */
+
+/*! ./crc32 */
+
+/*! ./data-stream.js */
+
+/*! ./decoder.js */
+
+/*! ./div2.js */
+
+/*! ./frame-header.js */
+
+/*! ./geometries.slice */
+
+/*! ./geometries.voxel */
+
+/*! ./geometries/geometries */
+
+/*! ./helpers.border */
+
+/*! ./helpers.boundingbox */
+
+/*! ./helpers.contour */
+
+/*! ./helpers.localizer */
+
+/*! ./helpers.lut */
+
+/*! ./helpers.progressbar */
+
+/*! ./helpers.progressbar.eventbased */
+
+/*! ./helpers.segmentationlut */
+
+/*! ./helpers.slice */
+
+/*! ./helpers.stack */
+
+/*! ./helpers.volumerendering */
+
+/*! ./helpers/helpers */
+
+/*! ./helpers/shaders.helpers.intersectBox */
+
+/*! ./huffman-table.js */
+
+/*! ./inffast */
+
+/*! ./inftrees */
+
+/*! ./interpolation/shaders.interpolation */
+
+/*! ./lib/deflate */
+
+/*! ./lib/inflate */
+
+/*! ./lib/utils/common */
+
+/*! ./lib/zlib/constants */
+
+/*! ./loaders.base */
+
+/*! ./loaders.volume */
+
+/*! ./loaders/loaders */
+
+/*! ./messages */
+
+/*! ./models.frame */
+
+/*! ./models.series */
+
+/*! ./models.stack */
+
+/*! ./models.voxel */
+
+/*! ./models/models */
+
+/*! ./mult2.js */
+
+/*! ./nifti1.js */
+
+/*! ./nifti2.js */
+
+/*! ./parsers.dicom */
+
+/*! ./parsers.mgh */
+
+/*! ./parsers.nifti */
+
+/*! ./parsers.nrrd */
+
+/*! ./parsers.volume */
+
+/*! ./parsers/parsers */
+
+/*! ./presets.segmentation */
+
+/*! ./presets.segmentation.freesurfer */
+
+/*! ./presets/presets */
+
+/*! ./quantization-table.js */
+
+/*! ./scan-component.js */
+
+/*! ./scan-header.js */
+
+/*! ./shaders.contour.fragment */
+
+/*! ./shaders.contour.uniform */
+
+/*! ./shaders.contour.vertex */
+
+/*! ./shaders.data.fragment */
+
+/*! ./shaders.data.uniform */
+
+/*! ./shaders.data.vertex */
+
+/*! ./shaders.interpolation.identity */
+
+/*! ./shaders.interpolation.trilinear */
+
+/*! ./shaders.layer.fragment */
+
+/*! ./shaders.layer.uniform */
+
+/*! ./shaders.layer.vertex */
+
+/*! ./shaders.localizer.fragment */
+
+/*! ./shaders.localizer.uniform */
+
+/*! ./shaders.localizer.vertex */
+
+/*! ./shaders.vr.fragment */
+
+/*! ./shaders.vr.uniform */
+
+/*! ./shaders.vr.vertex */
+
+/*! ./shaders/shaders */
+
+/*! ./src/ami.ts */
+
+/*! ./support/isBuffer */
+
+/*! ./trees */
+
+/*! ./utilities.js */
+
+/*! ./utils.js */
+
+/*! ./utils/common */
+
+/*! ./utils/strings */
+
+/*! ./widgets.angle */
+
+/*! ./widgets.annotation */
+
+/*! ./widgets.base */
+
+/*! ./widgets.biruler */
+
+/*! ./widgets.crossRuler */
+
+/*! ./widgets.css */
+
+/*! ./widgets.ellipse */
+
+/*! ./widgets.freehand */
+
+/*! ./widgets.handle */
+
+/*! ./widgets.peakVelocity */
+
+/*! ./widgets.polygon */
+
+/*! ./widgets.pressureHalfTime */
+
+/*! ./widgets.rectangle */
+
+/*! ./widgets.ruler */
+
+/*! ./widgets.velocityTimeIntegral */
+
+/*! ./widgets.voxelProbe */
+
+/*! ./widgets/widgets */
+
+/*! ./zlib/constants */
+
+/*! ./zlib/deflate */
+
+/*! ./zlib/gzheader */
+
+/*! ./zlib/inflate */
+
+/*! ./zlib/messages */
+
+/*! ./zlib/zstream */
+
+/*! OpenJPEG.js/dist/openJPEG-DynamicMemory-browser.js */
+
+/*! assert */
+
+/*! base64-js */
+
+/*! const-ninf-float32 */
+
+/*! const-pinf-float32 */
+
+/*! dicom-parser */
+
+/*! dicom-parser - 1.8.1 - 2018-05-16 | (c) 2017 Chris Hafey | https://github.com/cornerstonejs/dicomParser */
+
+/*! events */
+
+/*! exports provided: BorderHelper, borderHelperFactory, BoundingBoxHelper, boundingBoxHelperFactory, ContourHelper, contourHelperFactory, LocalizerHelper, localizerHelperFactory, LutHelper, lutHelperFactory, SegmentationLutHelper, ProgressBarHelper, ProgressBarEventBasedHelper, SliceHelper, sliceHelperFactory, StackHelper, stackHelperFactory, VolumeRenderingHelper, VolumeRenderingHelperFactory */
+
+/*! exports provided: Box3 */
+
+/*! exports provided: ColorsCore, IntersectionsCore, UtilsCore, ValidatorsCore */
+
+/*! exports provided: ContourUniformShader, ContourFragmentShader, ContourVertexShader, DataUniformShader, DataFragmentShader, DataVertexShader, VRUniformShader, VRFragmentShader, VRVertexShader, LayerUniformShader, LayerFragmentShader, LayerVertexShader, LocalizerUniformShader, LocalizerFragmentShader, LocalizerVertexShader */
+
+/*! exports provided: DicomParser, MghParser, NiftiParser, NrrdParser */
+
+/*! exports provided: FrameModel, StackModel, SeriesModel, VoxelModel */
+
+/*! exports provided: Matrix4 */
+
+/*! exports provided: OrthographicCamera, orthographicCameraFactory */
+
+/*! exports provided: Quaternion */
+
+/*! exports provided: REVISION, MOUSE, CullFaceNone, CullFaceBack, CullFaceFront, CullFaceFrontBack, FrontFaceDirectionCW, FrontFaceDirectionCCW, BasicShadowMap, PCFShadowMap, PCFSoftShadowMap, FrontSide, BackSide, DoubleSide, FlatShading, SmoothShading, NoColors, FaceColors, VertexColors, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending, CustomBlending, AddEquation, SubtractEquation, ReverseSubtractEquation, MinEquation, MaxEquation, ZeroFactor, OneFactor, SrcColorFactor, OneMinusSrcColorFactor, SrcAlphaFactor, OneMinusSrcAlphaFactor, DstAlphaFactor, OneMinusDstAlphaFactor, DstColorFactor, OneMinusDstColorFactor, SrcAlphaSaturateFactor, NeverDepth, AlwaysDepth, LessDepth, LessEqualDepth, EqualDepth, GreaterEqualDepth, GreaterDepth, NotEqualDepth, MultiplyOperation, MixOperation, AddOperation, NoToneMapping, LinearToneMapping, ReinhardToneMapping, Uncharted2ToneMapping, CineonToneMapping, ACESFilmicToneMapping, UVMapping, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, SphericalReflectionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping, RepeatWrapping, ClampToEdgeWrapping, MirroredRepeatWrapping, NearestFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter, UnsignedByteType, ByteType, ShortType, UnsignedShortType, IntType, UnsignedIntType, FloatType, HalfFloatType, UnsignedShort4444Type, UnsignedShort5551Type, UnsignedShort565Type, UnsignedInt248Type, AlphaFormat, RGBFormat, RGBAFormat, LuminanceFormat, LuminanceAlphaFormat, RGBEFormat, DepthFormat, DepthStencilFormat, RedFormat, RGB_S3TC_DXT1_Format, RGBA_S3TC_DXT1_Format, RGBA_S3TC_DXT3_Format, RGBA_S3TC_DXT5_Format, RGB_PVRTC_4BPPV1_Format, RGB_PVRTC_2BPPV1_Format, RGBA_PVRTC_4BPPV1_Format, RGBA_PVRTC_2BPPV1_Format, RGB_ETC1_Format, RGBA_ASTC_4x4_Format, RGBA_ASTC_5x4_Format, RGBA_ASTC_5x5_Format, RGBA_ASTC_6x5_Format, RGBA_ASTC_6x6_Format, RGBA_ASTC_8x5_Format, RGBA_ASTC_8x6_Format, RGBA_ASTC_8x8_Format, RGBA_ASTC_10x5_Format, RGBA_ASTC_10x6_Format, RGBA_ASTC_10x8_Format, RGBA_ASTC_10x10_Format, RGBA_ASTC_12x10_Format, RGBA_ASTC_12x12_Format, LoopOnce, LoopRepeat, LoopPingPong, InterpolateDiscrete, InterpolateLinear, InterpolateSmooth, ZeroCurvatureEnding, ZeroSlopeEnding, WrapAroundEnding, TrianglesDrawMode, TriangleStripDrawMode, TriangleFanDrawMode, LinearEncoding, sRGBEncoding, GammaEncoding, RGBEEncoding, LogLuvEncoding, RGBM7Encoding, RGBM16Encoding, RGBDEncoding, BasicDepthPacking, RGBADepthPacking, TangentSpaceNormalMap, ObjectSpaceNormalMap */
+
+/*! exports provided: RLEDecoder */
+
+/*! exports provided: Ray */
+
+/*! exports provided: Raycaster */
+
+/*! exports provided: SegmentationPreset */
+
+/*! exports provided: SliceGeometry, sliceGeometryFactory, VoxelGeometry, voxelGeometryFactory */
+
+/*! exports provided: Sphere */
+
+/*! exports provided: TrackballControl, trackballControlFactory, TrackballOrthoControl, trackballOrthoControlFactory, OrbitControl, orbitControlFactory */
+
+/*! exports provided: Triangle */
+
+/*! exports provided: Vector2 */
+
+/*! exports provided: Vector3 */
+
+/*! exports provided: VolumeLoader */
+
+/*! exports provided: WidgetsCss, AngleWidget, angleWidgetFactory, AnnotationWidget, annotationWidgetFactory, BiRulerWidget, birulerWidgetFactory, CrossRulerWidget, crossrulerWidgetFactory, EllipseWidget, ellipseWidgetFactory, FreehandWidget, freehandWidgetFactory, HandleWidget, handleWidgetFactory, PeakVelocityWidget, peakVelocityWidgetFactory, PressureHalfTimeWidget, pressureHalfTimeWidgetFactory, PolygonWidget, polygonWidgetFactory, RectangleWidget, rectangleWidgetFactory, RulerWidget, rulerWidgetFactory, VelocityTimeIntegralWidget, velocityTimeIntegralWidgetFactory, VoxelProbeWidget, voxelprobeWidgetFactory */
+
+/*! exports provided: _Math */
+
+/*! exports provided: camerasOrthographic, default */
+
+/*! exports provided: default */
+
+/*! exports provided: geometriesSlice, default */
+
+/*! exports provided: geometriesVoxel, default */
+
+/*! exports provided: helpersBorder, default */
+
+/*! exports provided: helpersBoundingBox, default */
+
+/*! exports provided: helpersContour, default */
+
+/*! exports provided: helpersLocalizer, default */
+
+/*! exports provided: helpersLut, default */
+
+/*! exports provided: helpersMaterialMixin, default */
+
+/*! exports provided: helpersSlice, default */
+
+/*! exports provided: helpersStack, default */
+
+/*! exports provided: helpersVolumeRendering, default */
+
+/*! exports provided: name, version, description, main, repository, jsnext:main, module, files, directories, eslintConfig, scripts, keywords, author, license, bugs, homepage, devDependencies, jspm, default */
+
+/*! exports provided: name, version, main, keywords, author, license, repository, config, lint-staged, prettier, sideEffects, dependencies, scripts, devDependencies, engines, default */
+
+/*! exports provided: orbit, default */
+
+/*! exports provided: trackball, default */
+
+/*! exports provided: trackballOrtho, default */
+
+/*! exports provided: widgetsAngle, default */
+
+/*! exports provided: widgetsAnnotation, default */
+
+/*! exports provided: widgetsBiruler, default */
+
+/*! exports provided: widgetsCrossRuler, default */
+
+/*! exports provided: widgetsEllipse, default */
+
+/*! exports provided: widgetsFreehand, default */
+
+/*! exports provided: widgetsHandle, default */
+
+/*! exports provided: widgetsPeakVelocity, default */
+
+/*! exports provided: widgetsPolygon, default */
+
+/*! exports provided: widgetsPressureHalfTime, default */
+
+/*! exports provided: widgetsRectangle, default */
+
+/*! exports provided: widgetsRuler, default */
+
+/*! exports provided: widgetsVelocityTimeIntegral, default */
+
+/*! exports provided: widgetsVoxelprobe, default */
+
+/*! fs */
+
+/*! ieee754 */
+
+/*! image-JPEG2000 - v0.3.1 - 2015-08-26 | https://github.com/OHIF/image-JPEG2000 */
+
+/*! inherits */
+
+/*! isarray */
+
+/*! jpeg-lossless-decoder-js */
+
+/*! math-abs */
+
+/*! math-ceil */
+
+/*! math-float32-to-binary-string */
+
+/*! math-floor */
+
+/*! nifti-reader-js/src/nifti */
+
+/*! no static exports found */
+
+/*! nrrd-js */
+
+/*! pako */
+
+/*! path */
+
+/*! three/src/constants */
+
+/*! three/src/core/Raycaster */
+
+/*! three/src/math/Box3 */
+
+/*! three/src/math/Matrix4 */
+
+/*! three/src/math/Triangle */
+
+/*! three/src/math/Vector2 */
+
+/*! three/src/math/Vector3 */
+
+/*! util/ */
+
+/*! utils-left-pad-string */
+
+/*! utils-repeat-string */
+
+/*! utils-right-pad-string */
+
+/*! validate.io-integer */
+
+/*! validate.io-nonnegative-integer */
+
+/*! validate.io-number */
+
+/*! validate.io-string-primitive */
+
+/*!********************!*\
+  !*** ./src/ami.ts ***!
+  \********************/
+
+/*!**********************!*\
+  !*** ./package.json ***!
+  \**********************/
+
+/*!**************************!*\
+  !*** ./src/core/core.js ***!
+  \**************************/
+
+/*!**************************!*\
+  !*** multi ./src/ami.ts ***!
+  \**************************/
+
+/*!******************************!*\
+  !*** ./src/models/models.js ***!
+  \******************************/
+
+/*!********************************!*\
+  !*** ./src/cameras/cameras.js ***!
+  \********************************/
+
+/*!********************************!*\
+  !*** ./src/core/core.utils.js ***!
+  \********************************/
+
+/*!********************************!*\
+  !*** ./src/helpers/helpers.js ***!
+  \********************************/
+
+/*!********************************!*\
+  !*** ./src/loaders/loaders.js ***!
+  \********************************/
+
+/*!********************************!*\
+  !*** ./src/parsers/parsers.js ***!
+  \********************************/
+
+/*!********************************!*\
+  !*** ./src/presets/presets.js ***!
+  \********************************/
+
+/*!********************************!*\
+  !*** ./src/shaders/shaders.js ***!
+  \********************************/
+
+/*!********************************!*\
+  !*** ./src/widgets/widgets.js ***!
+  \********************************/
+
+/*!*********************************!*\
+  !*** ./external/scripts/jpx.js ***!
+  \*********************************/
+
+/*!*********************************!*\
+  !*** ./src/core/core.colors.ts ***!
+  \*********************************/
+
+/*!**********************************!*\
+  !*** ./external/scripts/jpeg.js ***!
+  \**********************************/
+
+/*!**********************************!*\
+  !*** ./src/controls/controls.js ***!
+  \**********************************/
+
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+
+/*!***********************************!*\
+  !*** ./node_modules/util/util.js ***!
+  \***********************************/
+
+/*!***********************************!*\
+  !*** ./src/models/models.base.js ***!
+  \***********************************/
+
+/*!************************************!*\
+  !*** ./node_modules/pako/index.js ***!
+  \************************************/
+
+/*!************************************!*\
+  !*** ./src/helpers/helpers.lut.js ***!
+  \************************************/
+
+/*!************************************!*\
+  !*** ./src/models/models.frame.js ***!
+  \************************************/
+
+/*!************************************!*\
+  !*** ./src/models/models.stack.js ***!
+  \************************************/
+
+/*!************************************!*\
+  !*** ./src/models/models.voxel.js ***!
+  \************************************/
+
+/*!************************************!*\
+  !*** ./src/parsers/parsers.mgh.js ***!
+  \************************************/
+
+/*!************************************!*\
+  !*** ./src/parsers/parsers.mhd.js ***!
+  \************************************/
+
+/*!************************************!*\
+  !*** ./src/widgets/widgets.css.js ***!
+  \************************************/
+
+/*!*************************************!*\
+  !*** ./src/core/core.validators.js ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./src/loaders/loaders.base.js ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./src/models/models.series.js ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./src/parsers/parsers.nrrd.js ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./src/shaders/shaders.base.js ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./src/widgets/widgets.base.ts ***!
+  \*************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/buffer/index.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/nrrd-js/nrrd.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./src/decoders/decoders.rle.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./src/geometries/geometries.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./src/helpers/helpers.slice.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./src/helpers/helpers.stack.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./src/parsers/parsers.dicom.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./src/parsers/parsers.nifti.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./src/widgets/widgets.angle.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./src/widgets/widgets.ruler.js ***!
+  \**************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/assert/assert.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/events/events.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/ieee754/index.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/isarray/index.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./src/helpers/helpers.border.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./src/loaders/loaders.volume.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./src/parsers/parsers.volume.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./src/widgets/widgets.handle.js ***!
+  \***************************************/
+
+/*!****************************************!*\
+  !*** ./src/controls/controls.orbit.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./src/core/core.intersections.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./src/helpers/helpers.contour.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./src/widgets/widgets.biruler.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./src/widgets/widgets.ellipse.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./src/widgets/widgets.polygon.js ***!
+  \****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/base64-js/index.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/process/browser.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/three/package.json ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./src/widgets/widgets.freehand.js ***!
+  \*****************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/pako/lib/deflate.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/pako/lib/inflate.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./src/helpers/helpers.localizer.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./src/shaders/shaders.vr.vertex.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./src/widgets/widgets.rectangle.js ***!
+  \******************************************/
+
+/*!*******************************************!*\
+  !*** ./src/shaders/shaders.vr.uniform.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./src/widgets/widgets.annotation.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./src/widgets/widgets.crossRuler.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./src/widgets/widgets.voxelProbe.js ***!
+  \*******************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/math-abs/lib/index.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/three/src/math/Ray.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./src/controls/controls.trackball.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./src/geometries/geometries.slice.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./src/geometries/geometries.voxel.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./src/helpers/helpers.boundingbox.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./src/helpers/helpers.progressbar.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./src/shaders/shaders.data.vertex.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./src/shaders/shaders.vr.fragment.js ***!
+  \********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/math-ceil/lib/index.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/pako/lib/zlib/crc32.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/pako/lib/zlib/trees.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/three/src/constants.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/three/src/math/Box3.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/three/src/math/Math.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./src/cameras/cameras.orthographic.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./src/presets/presets.segmentation.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./src/shaders/shaders.data.uniform.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./src/shaders/shaders.layer.vertex.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./src/widgets/widgets.peakVelocity.js ***!
+  \*********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/math-floor/lib/index.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./src/shaders/shaders.data.fragment.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./src/shaders/shaders.layer.uniform.js ***!
+  \**********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/pako/lib/utils/common.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/pako/lib/zlib/adler32.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/pako/lib/zlib/deflate.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/pako/lib/zlib/inffast.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/pako/lib/zlib/inflate.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/pako/lib/zlib/zstream.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/path-browserify/index.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/three/src/math/Sphere.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./src/helpers/helpers.material.mixin.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./src/shaders/shaders.contour.vertex.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./src/shaders/shaders.layer.fragment.js ***!
+  \***********************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/pako/lib/utils/strings.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/pako/lib/zlib/gzheader.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/pako/lib/zlib/inftrees.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/pako/lib/zlib/messages.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/three/src/math/Matrix4.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/three/src/math/Vector2.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/three/src/math/Vector3.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./src/helpers/helpers.segmentationlut.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./src/helpers/helpers.volumerendering.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./src/shaders/shaders.contour.uniform.js ***!
+  \************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/pako/lib/zlib/constants.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/three/src/math/Triangle.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./src/controls/controls.trackballortho.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./src/shaders/shaders.contour.fragment.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./src/shaders/shaders.localizer.vertex.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./src/widgets/widgets.pressureHalfTime.js ***!
+  \*************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/three/src/core/Raycaster.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./src/shaders/shaders.localizer.uniform.js ***!
+  \**************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/inherits/inherits_browser.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/nifti-reader-js/src/nifti.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/three/src/math/Quaternion.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./src/shaders/shaders.localizer.fragment.js ***!
+  \***************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/nifti-reader-js/src/nifti1.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/nifti-reader-js/src/nifti2.js ***!
+  \****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./src/widgets/widgets.velocityTimeIntegral.js ***!
+  \*****************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/const-ninf-float32/lib/index.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/const-pinf-float32/lib/index.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/node-libs-browser/mock/empty.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/util/support/isBufferBrowser.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/validate.io-number/lib/index.js ***!
+  \******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/nifti-reader-js/src/utilities.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/utils-repeat-string/lib/index.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/validate.io-integer/lib/index.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./src/helpers/helpers.progressbar.eventbased.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./src/shaders/helpers/shaders.helpers.unpack.js ***!
+  \*******************************************************/
+
+/*!********************************************************!*\
+  !*** ./src/presets/presets.segmentation.freesurfer.js ***!
+  \********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/utils-left-pad-string/lib/index.js ***!
+  \*********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/utils-right-pad-string/lib/index.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./src/shaders/helpers/shaders.helpers.texture3d.js ***!
+  \**********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/dicom-parser/dist/dicomParser.min.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/jpeg-lossless-decoder-js/src/main.js ***!
+  \***********************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/jpeg-lossless-decoder-js/src/utils.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./src/shaders/interpolation/shaders.interpolation.js ***!
+  \************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./src/shaders/helpers/shaders.helpers.intersectBox.js ***!
+  \*************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/jpeg-lossless-decoder-js/src/decoder.js ***!
+  \**************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/math-float32-to-binary-string/lib/div2.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/validate.io-string-primitive/lib/index.js ***!
+  \****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/math-float32-to-binary-string/lib/index.js ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/math-float32-to-binary-string/lib/mult2.js ***!
+  \*****************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/jpeg-lossless-decoder-js/src/data-stream.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/jpeg-lossless-decoder-js/src/scan-header.js ***!
+  \******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/jpeg-lossless-decoder-js/src/frame-header.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/validate.io-nonnegative-integer/lib/index.js ***!
+  \*******************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/jpeg-lossless-decoder-js/src/huffman-table.js ***!
+  \********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/jpeg-lossless-decoder-js/src/component-spec.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/jpeg-lossless-decoder-js/src/scan-component.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./src/shaders/interpolation/shaders.interpolation.identity.js ***!
+  \*********************************************************************/
+
+/*!**********************************************************************!*\
+  !*** ./src/shaders/interpolation/shaders.interpolation.trilinear.js ***!
+  \**********************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/OpenJPEG.js/dist/openJPEG-DynamicMemory-browser.js ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/jpeg-lossless-decoder-js/src/quantization-table.js ***!
+  \*************************************************************************/
+
+/**
+ * lil-gui
+ * https://lil-gui.georgealways.com
+ * @version 0.16.0
+ * @author George Michael Brower
+ * @license MIT
+ */

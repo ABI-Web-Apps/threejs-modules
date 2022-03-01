@@ -1,8 +1,9 @@
 const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-  mode: "development",
-  // mode: "production",
+  mode: "production",
+  devtool: "source-map",
   optimization: {
     minimize: true,
     concatenateModules: true,
@@ -13,23 +14,30 @@ module.exports = {
     maxAssetSize: 512000,
   },
 
-  entry: "./src/Copper3D/main.js",
+  entry: {
+    copper3d: "./src/Copper3D/main.js",
+    "copper3d.min": "./src/Copper3D/main.js",
+  },
   output: {
     path: path.join(__dirname, "build"),
-    filename: "copper3d.js",
+    filename: "[name].js",
     library: "Copper3D",
+    // libraryExport: "default",
     libraryTarget: "umd",
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        include: /\.min\.js$/,
+      }),
+    ],
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader", "postcss-loader"],
-      },
-      { test: /\.less$/i, use: ["style-loader", "css-loader", "less-loader"] },
-      {
-        test: /\.scss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.js$/i,
@@ -42,24 +50,6 @@ module.exports = {
         options: {
           esModule: false,
         },
-      },
-      {
-        test: /\.(dcm)(\?.*)?$/,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              limit: 1024 * 4,
-              esModule: false,
-              fallback: {
-                loader: require.resolve("file-loader"),
-                options: {
-                  outputPath: "images",
-                },
-              },
-            },
-          },
-        ],
       },
     ],
   },
