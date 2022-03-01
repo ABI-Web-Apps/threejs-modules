@@ -28,12 +28,8 @@ const setMpa = () => {
         hash: true,
         inject: true,
         minify: {
-          html5: true,
-          collapseWhitespace: true,
-          preserveLineBreaks: false,
           minifyJS: true,
           minifyCSS: true,
-          removeComments: false,
         },
       })
     );

@@ -71,7 +71,6 @@ gui.add({ cameraOpen: false }, "cameraOpen").onChange((v) => {
 });
 
 const getMesh = (mesh) => {
-  console.log(mesh);
   mesh[0].scale.set(50, 50, 50);
   mesh[0].position.set(-200, -50, 0);
   scene1.camera.position.set(0, 0, 500);
