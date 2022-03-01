@@ -22,7 +22,7 @@ module.exports = {
     path: path.join(__dirname, "build"),
     filename: "[name].js",
     library: "Copper3D",
-    libraryExport: "default",
+    // libraryExport: "default",
     libraryTarget: "umd",
   },
   optimization: {
